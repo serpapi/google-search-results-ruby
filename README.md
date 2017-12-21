@@ -1,7 +1,5 @@
 # Google Search Results in Ruby
 
-DISCLAIMER: Work In Progess.
-
 This Ruby Gem is meant to scrape and parse Google results using [SERP API](https://serpapi.com). Feel free to fork this repository to add more backends.
 
 ## Simple Example
