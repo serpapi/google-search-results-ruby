@@ -1,0 +1,21 @@
+PATH
+  remote: .
+  specs:
+    google_search_results (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.10.3)
+    rake (10.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  google_search_results!
+  minitest (~> 5.2)
+  rake (~> 10.2)
+
+BUNDLED WITH
+   1.16.0
