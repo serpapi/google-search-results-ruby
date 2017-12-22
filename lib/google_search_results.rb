@@ -6,7 +6,7 @@ require_relative 'google_search_results/hash'
 
 class GoogleSearchResults
 
-  VERSION = "0.0.2"
+  VERSION = "0.1.0"
   BACKEND = "serpapi.com"
 
   @@serp_api_key = nil
