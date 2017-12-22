@@ -29,14 +29,26 @@ class GoogleSearchResults
     URI::HTTPS.build(host: BACKEND, path: '/search', query: URI.encode_www_form(@params))
   end
 
+  def get_results
+    begin
+      open(construct_url).read
+    rescue OpenURI::HTTPError => e
+      if error = JSON.load(e.io.read)["error"]      
+        raise error
+      else
+        raise e
+      end
+    end
+  end
+
   def get_html
     @params[:output] = "html"
-    open(construct_url).read
+    get_results
   end
 
   def get_json
     @params[:output] = "json"
-    open(construct_url).read
+    get_results
   end
 
   def get_hash
