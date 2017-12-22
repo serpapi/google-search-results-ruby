@@ -6,7 +6,7 @@ require_relative 'google_search_results/hash'
 
 class GoogleSearchResults
 
-  VERSION = "0.0.1"
+  VERSION = "0.0.2"
   BACKEND = "serpapi.com"
 
   class << self
