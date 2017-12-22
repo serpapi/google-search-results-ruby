@@ -1,7 +1,7 @@
 # Google Search Results in Ruby
 
 [![Gem Version](https://badge.fury.io/rb/google_search_results.svg)](https://rubygems.org/gems/google_search_results/)
-[![Build Status](https://travis-ci.org/serpapi/google_search_results.svg?branch=master)](https://travis-ci.org/serpapi/google_search_results)
+[![Build Status](https://travis-ci.org/serpapi/google-search-results-ruby.svg?branch=master)](https://travis-ci.org/serpapi/google-search-results-ruby)
 
 This Ruby Gem is meant to scrape and parse Google results using [SERP API](https://serpapi.com). Feel free to fork this repository to add more backends.
 
