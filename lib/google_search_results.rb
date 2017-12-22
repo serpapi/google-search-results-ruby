@@ -9,6 +9,8 @@ class GoogleSearchResults
   VERSION = "0.0.2"
   BACKEND = "serpapi.com"
 
+  @@serp_api_key = nil
+
   class << self
     attr_accessor :serp_api_key
   end
@@ -21,7 +23,9 @@ class GoogleSearchResults
 
   def construct_url
     @params[:source] = "ruby"
-    @params[:serp_api_key] = (@params[:serp_api_key] ? @params[:serp_api_key] : @@serp_api_key)
+    if @params[:serp_api_key].nil? and GoogleSearchResults.serp_api_key
+      @params[:serp_api_key] = GoogleSearchResults.serp_api_key
+    end
     URI::HTTPS.build(host: BACKEND, path: '/search', query: URI.encode_www_form(@params))
   end
 
