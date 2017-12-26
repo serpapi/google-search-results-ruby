@@ -32,8 +32,16 @@ class GoogleSearchResultsTest < Minitest::Test
     assert_includes @query.get_json, "coffee"
   end
 
+  def test_json_with_images_output
+    assert_includes @query.get_json_with_images, "coffee"
+  end
+
   def test_hash_output
     refute_empty @query.get_hash[:organic_results]
+  end
+
+  def test_hash_with_images_output
+    refute_empty @query.get_hash_with_images[:organic_results]
   end
 
 end
