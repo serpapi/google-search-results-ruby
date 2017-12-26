@@ -6,7 +6,7 @@ require_relative 'google_search_results/hash'
 
 class GoogleSearchResults
 
-  VERSION = "0.2.0"
+  VERSION = "1.0.0"
   BACKEND = "serpapi.com"
 
   @@serp_api_key = nil
@@ -51,8 +51,17 @@ class GoogleSearchResults
     get_results
   end
 
+  def get_json_with_images
+    @params[:output] = "json_with_images"
+    get_results
+  end
+
   def get_hash
     JSON.load(get_json).symbolize_all_keys
+  end
+
+  def get_hash_with_images
+    JSON.load(get_json_with_images).symbolize_all_keys
   end
 
 end 
