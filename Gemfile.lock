@@ -1,12 +1,12 @@
 PATH
   remote: .
   specs:
-    google_search_results (0.0.1)
+    google_search_results (1.0.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    minitest (5.10.3)
+    minitest (5.11.1)
     rake (10.5.0)
 
 PLATFORMS
