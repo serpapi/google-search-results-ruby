@@ -7,10 +7,13 @@ This Ruby Gem is meant to scrape and parse Google results using [SERP API](https
 
 ## Installation
 
-    gem install google_search_results
+Assuming Ruby is already installed:
+
+    $ gem install google_search_results
 
 ## Simple Example
 
+    require 'google_search_results'
     query = GoogleSearchResults.new q: "coffee"
     hash_results = query.get_hash
 
