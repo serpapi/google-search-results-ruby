@@ -26,3 +26,6 @@ tmp
 *.rbc
 
 test.rb
+
+## Text Editor
+.vscode
