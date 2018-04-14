@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    google_search_results (1.0.0)
+    google_search_results (1.0.1)
 
 GEM
   remote: https://rubygems.org/
