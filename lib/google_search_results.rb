@@ -30,14 +30,12 @@ class GoogleSearchResults
   end
 
   def get_results
-    begin
-      open(construct_url).read
-    rescue OpenURI::HTTPError => e
-      if error = JSON.load(e.io.read)["error"]      
-        raise error
-      else
-        raise e
-      end
+    open(construct_url).read
+  rescue OpenURI::HTTPError => e
+    if error = JSON.load(e.io.read)["error"]
+      raise error
+    else
+      raise e
     end
   end
 
@@ -64,4 +62,4 @@ class GoogleSearchResults
     JSON.load(get_json_with_images).symbolize_all_keys
   end
 
-end 
+end
