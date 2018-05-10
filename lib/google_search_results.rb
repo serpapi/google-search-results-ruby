@@ -31,7 +31,7 @@ class GoogleSearchResults
 
   def get_results
     begin
-      open(construct_url).read
+      open(construct_url, read_timeout: 600).read
     rescue OpenURI::HTTPError => e
       if error = JSON.load(e.io.read)["error"]      
         raise error
