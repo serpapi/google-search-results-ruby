@@ -47,7 +47,15 @@ Et voila..
 ## Example
  * [How to set SERP API key](#how-to-set-serp-api-key)
  * [Search API capability](#search-api-capability)
- * [Example by tests] (#example-by-tests)
+ * [Example by specification](#example-by-specification)
+ * [Location API](#location-api)
+ * [Search Archive API](#search-archive-api)
+ * [Account API](#account-api)
+ * [Search Google Images](#search-google-images)
+ * [Search Google News](#search-google-news)
+ * [Search Google Shopping](#search-google-shopping)
+ * [Google Search By Location](#google-search-by-location)
+ * [Batch Asynchronous search](#batch-asynchronous-search)
 
 ### How to set SERP API key
 The Serp API key can be set globally using a singleton pattern.
@@ -61,7 +69,7 @@ The Serp API key can be provided for each query.
 query = GoogleSearchResults.new(q: "coffee", serp_api_key: "secret_api_key")
 ```
 
-### Search API
+### Search API capability
 ```ruby
 query_params = {
   q: "query",
@@ -76,13 +84,15 @@ query_params = {
   serp_api_key: "Your SERP API Key",
   tbm: "nws|isch|shop"
   tbs: "custom to be search criteria"
+  async: true|false # allow async 
+  output: "json|html" # output format
 }
 
 # define the search query
 query = GoogleSearchResults.new(query_params)
 
 # override an existing parameter
-query.params[:location] = "Portland"
+query.params[:location] = "Portland,Oregon,United States"
 
 # search format return as raw html
 html_results = query.get_html
@@ -94,7 +104,11 @@ hash_results = query.get_hash
 json_results = query.get_json
 ```
 
-### Example by tests
+(the full documentation)[https://serpapi.com/search-api]
+
+see below for more hands on examples.
+
+### Example by specification
 
 We love true open source, continuous integration and Test Drive Development (TDD). 
  We are using RSpec to test [our infrastructure around the clock](https://travis-ci.org/serpapi/google-search-results-ruby) to achieve the best QoS (Quality Of Service).
@@ -105,7 +119,10 @@ Install RSpec
 ```gem install rspec``
 
 To run the test:
-```rspec``
+```rspec test``
+
+or if you prefers Rake
+```rake test``
 
 ### Location API
 
@@ -136,23 +153,149 @@ gsr = GoogleSearchResults.new(q: "Coffee", location: "Portland")
 original_search = gsr.get_hash
 search_id = original_search[:search_metadata][:id]
 
-Now let retrieve the previous search from the archieve.
+Now let retrieve the previous search from the archive.
 ```ruby
 gsr = GoogleSearchResults.new
 archive_search = gsr.get_search_archive(search_id)
 pp archive_search
 ```
-it prints the archive search.
+it prints the search from the archive.
 
 ### Account API
 ```ruby
 gsr = GoogleSearchResults.new
 pp gsr.get_account
 ```
-it prints the account information.
+it prints your account information.
 
-## More search
-This service supports Google Images, News, Shopping.
+### Search Google Images
+
+```ruby
+gsr = GoogleSearchResults.new(q: 'cofffe', tbm: "isch")
+image_results_list = gsr.get_hash[:images_results]
+image_results_list.each do |image_result|
+  puts image_result[:original]
+  # to download the image:
+  # `wget #{image_result[:original]}`
+end
+```
+
+this code prints all the images links, 
+ and download image if you un-comment the line with wget (linux/osx tool to download image).
+
+### Search Google News
+
+```ruby
+gsr = GoogleSearchResults.new({
+  q: 'cofffe', # search query
+  tbm: "nws", # news
+  tbs: "qdr:d", # last 24h
+  num: 10
+})
+
+3.times do |offset|
+  gsr.params[:start] = offset * 10
+  news_results_list = gsr.get_hash[:news_results]
+  news_results_list.each do |news_result|
+    puts "#{news_result[:position] + offset * 10} - #{news_result[:title]}"
+  end
+end
+```
+
+this script prints the first 3 pages of the news title for the last 24h.
+
+### Search Google Shopping
+
+```ruby
+gsr = GoogleSearchResults.new({
+  q: 'cofffe', # search query
+  tbm: "shop", # shopping
+  tbs: "tbs=p_ord:rv" # by best review
+})
+shopping_results_list = gsr.get_hash[:shopping_results]
+shopping_results_list.each do |shopping_result|
+  puts "#{shopping_result[:position]} - #{shopping_result[:title]}"
+end
+```
+
+this script prints all the shopping results order by review order with position.
+
+### Google Search By Location
+
+With Serp API, we can build Google search from anywhere in the world.
+This code is looking for the best coffee shop per city.
+
+```ruby
+["new york", "paris", "berlin"].each do |city|
+    # get location from the city name
+    location = GoogleSearchResults.new({q: city, limit: 1}).get_location.first[:canonical_name]
+
+    # get top result
+    gsr = GoogleSearchResults.new({
+      q: 'best coffee shop', 
+      location: location,
+      num: 1,  # number of result
+      start: 0 # offset
+    })
+    top_result = gsr.get_hash[:organic_results].first
+
+    puts "top coffee result for #{location} is: #{top_result[:title]}"
+  end
+```
+
+### Batch Asynchronous search
+
+We do offer two ways to boost your searches thanks to `async` parameter.
+ - Non-blocking - async=true  (recommended)
+ - Blocking - async=false - it's more compute intensive because the client would need to hold many connections.
+
+```ruby
+company_list = %w(microsoft apple nvidia)
+
+puts "submit batch of asynchronous searches"
+gsr = GoogleSearchResults.new({async: true})
+
+search_queue = Queue.new
+company_list.each do |company|
+  # set query
+  gsr.params[:q] = company
+
+  # store request into a search_queue
+  search = gsr.get_hash()
+  if search[:search_metadata][:status] =~ /Cached|Success/
+    puts "#{company}: search done"
+    next
+  end
+
+  # add search to the search_queue
+  search_queue.push(search)
+end
+
+puts "wait until all searches are cached or success"
+gsr = GoogleSearchResults.new
+while !search_queue.empty?
+  search = search_queue.pop
+  # extract search id
+  search_id = search[:search_metadata][:id]
+
+  # retrieve search from the archive
+  search_archived =  gsr.get_search_archive(search_id)
+  if search_archived[:search_metadata][:status] =~ /Cached|Success/
+    puts "#{search_archived[:search_parameters][:q]}: search done"
+    next
+  end
+
+  # add back the search
+  search_queue.push(search)
+end
+
+search_queue.close
+puts 'all searches completed'
+  ```
+This code shows a simple implementation to run a batch of asynchronously searches.
+
+## Conclusion
+Serp API supports Google Images, News, Shopping and more..
 To enable a type of search, the field tbm (to be matched) must be set to:
 
  * isch: Google Images API.
@@ -160,6 +303,8 @@ To enable a type of search, the field tbm (to be matched) must be set to:
  * shop: Google Shopping API.
  * any other Google service should work out of the box.
  * (no tbm parameter): regular Google Search.
+
+The field `tbs` allows to customize the search even more.
 
 [The full documentation is available here.](https://serpapi.com/search-api)
 
