@@ -78,6 +78,10 @@ end
 describe 'Batch Asynchronous search' do
 
   it 'run a batch of news search against a list of popular technology company.' do
+    if ENV['SERPAPI_KEY'].nil?
+      skip("no serpapi_key provided")
+    end
+
     company_list = %w(microsoft apple nvidia)
   
     puts "submit batch asynchronous search"
