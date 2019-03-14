@@ -130,8 +130,10 @@ or if you prefers Rake
 location_list = GoogleSearchResults.new(q: "Austin", limit: 3).get_location
 pp location_list
 ```
+
 it prints the first 3 location matching Austin (Texas, Texas, Rochester)
-```
+
+```ruby
 [{:id=>"585069bdee19ad271e9bc072",
   :google_id=>200635,
   :google_parent_id=>21176,
@@ -147,13 +149,16 @@ it prints the first 3 location matching Austin (Texas, Texas, Rochester)
 
 ### Search Archive API
 
-Let's run a search to get a search_id.
+
+a search to get a search_id.
 ```ruby
 gsr = GoogleSearchResults.new(q: "Coffee", location: "Portland")
 original_search = gsr.get_hash
 search_id = original_search[:search_metadata][:id]
+```
 
 Now let retrieve the previous search from the archive.
+
 ```ruby
 gsr = GoogleSearchResults.new
 archive_search = gsr.get_search_archive(search_id)
