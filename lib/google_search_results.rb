@@ -12,15 +12,17 @@
 #   safe: "Safe Search Flag",
 #   num: "Number of Results",
 #   start: "Pagination Offset",
+#   tbm: "to be matched field",
+#   tbs: "to be searched field",
 #   serp_api_key: "Your SERP API Key"
 # }
 #
-# gsr = GoogleSearchResults.new(parameter)
-# gsr.params[:location] = "Portland"
+# client = GoogleSearchResults.new(parameter)
+# client.params[:location] = "Portland"
 #
-# html_results = gsr.get_html
-# hash_results = gsr.get_hash
-# json_results = gsr.get_json
+# html_results = client.get_html
+# hash_results = client.get_hash
+# json_results = client.get_json
 # ```
 # encoding: UTF-8
 
@@ -45,8 +47,8 @@ class GoogleSearchResults
   # Usage
   # ---
   # ```require 'google_search_results'
-  # gsr = GoogleSearchResults.new({q: "coffee", serp_api_key: "Your SERP API Key")
-  # result = gsr.get_json```
+  # client = GoogleSearchResults.new({q: "coffee", serp_api_key: "Your SERP API Key")
+  # result = client.get_json```
   #
   def initialize(params = {})
     @params = params

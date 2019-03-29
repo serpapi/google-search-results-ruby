@@ -7,7 +7,8 @@ describe "Location API" do
   end
   
   it 'example' do
-    location_list = GoogleSearchResults.new(q: "Austin", limit: 3).get_location
+    client = GoogleSearchResults.new(q: "Austin", limit: 3) 
+    location_list = client.get_location
     expect(location_list.size).to eq(3)
 
     first = location_list.first

@@ -28,14 +28,14 @@ $ gem install google_search_results
 
 ```ruby
 require 'google_search_results'
-query = GoogleSearchResults.new(q: "coffee", serp_api_key: "secret_api_key" )
-hash_results = query.get_hash
+client = GoogleSearchResults.new(q: "coffee", serp_api_key: "secret_api_key" )
+hash_results = client.get_hash
  ```
 
 This example runs a search about "coffee" using your secret api key.
 
 The Serp API service (backend)
- - searches on Google using the query: q = "coffee"
+ - searches on Google using the client: q = "coffee"
  - parses the messy HTML responses
  - return a standardizes JSON response
 The Ruby class GoogleSearchResults
@@ -61,18 +61,18 @@ Et voila..
 The Serp API key can be set globally using a singleton pattern.
 ```ruby
 GoogleSearchResults.serp_api_key = "secret_api_key"
-query = GoogleSearchResults.new(q: "coffee")
+client = GoogleSearchResults.new(q: "coffee")
 ```
 
-The Serp API key can be provided for each query.
+The Serp API key can be provided for each client.
 ```ruby
-query = GoogleSearchResults.new(q: "coffee", serp_api_key: "secret_api_key")
+client = GoogleSearchResults.new(q: "coffee", serp_api_key: "secret_api_key")
 ```
 
 ### Search API capability
 ```ruby
-query_params = {
-  q: "query",
+client_params = {
+  q: "client",
   google_domain: "Google Domain", 
   location: "Location Requested", 
   device: "desktop|mobile|tablet",
@@ -88,20 +88,20 @@ query_params = {
   output: "json|html" # output format
 }
 
-# define the search query
-query = GoogleSearchResults.new(query_params)
+# define the search client
+client = GoogleSearchResults.new(client_params)
 
 # override an existing parameter
-query.params[:location] = "Portland,Oregon,United States"
+client.params[:location] = "Portland,Oregon,United States"
 
 # search format return as raw html
-html_results = query.get_html
+html_results = client.get_html
 
 # search format returns a Hash
-hash_results = query.get_hash
+hash_results = client.get_hash
 
 # search as raw JSON format
-json_results = query.get_json
+json_results = client.get_json
 ```
 
 (the full documentation)[https://serpapi.com/search-api]
@@ -115,14 +115,19 @@ We love true open source, continuous integration and Test Drive Development (TDD
  
 The directory test/ includes specification/examples.
 
+Set your api key.
+```bash
+export API_KEY="your secret key"
+```
+
 Install RSpec
-```gem install rspec``
+```gem install rspec```
 
 To run the test:
-```rspec test``
+```rspec test```
 
 or if you prefers Rake
-```rake test``
+```rake test```
 
 ### Location API
 
@@ -131,7 +136,7 @@ location_list = GoogleSearchResults.new(q: "Austin", limit: 3).get_location
 pp location_list
 ```
 it prints the first 3 location matching Austin (Texas, Texas, Rochester)
-```
+```ruby
 [{:id=>"585069bdee19ad271e9bc072",
   :google_id=>200635,
   :google_parent_id=>21176,
@@ -149,30 +154,30 @@ it prints the first 3 location matching Austin (Texas, Texas, Rochester)
 
 Let's run a search to get a search_id.
 ```ruby
-gsr = GoogleSearchResults.new(q: "Coffee", location: "Portland")
-original_search = gsr.get_hash
+client = GoogleSearchResults.new(q: "Coffee", location: "Portland")
+original_client = client.get_hash
 search_id = original_search[:search_metadata][:id]
 
 Now let retrieve the previous search from the archive.
 ```ruby
-gsr = GoogleSearchResults.new
-archive_search = gsr.get_search_archive(search_id)
+client = GoogleSearchResults.new
+archive_client = client.get_search_archive(search_id)
 pp archive_search
 ```
 it prints the search from the archive.
 
 ### Account API
 ```ruby
-gsr = GoogleSearchResults.new
-pp gsr.get_account
+client = GoogleSearchResults.new
+pp client.get_account
 ```
 it prints your account information.
 
 ### Search Google Images
 
 ```ruby
-gsr = GoogleSearchResults.new(q: 'cofffe', tbm: "isch")
-image_results_list = gsr.get_hash[:images_results]
+client = GoogleSearchResults.new(q: 'cofffe', tbm: "isch")
+image_results_list = client.get_hash[:images_results]
 image_results_list.each do |image_result|
   puts image_result[:original]
   # to download the image:
@@ -186,16 +191,16 @@ this code prints all the images links,
 ### Search Google News
 
 ```ruby
-gsr = GoogleSearchResults.new({
-  q: 'cofffe', # search query
+client = GoogleSearchResults.new({
+  q: 'cofffe', # search client
   tbm: "nws", # news
   tbs: "qdr:d", # last 24h
   num: 10
 })
 
 3.times do |offset|
-  gsr.params[:start] = offset * 10
-  news_results_list = gsr.get_hash[:news_results]
+  client.params[:start] = offset * 10
+  news_results_list = client.get_hash[:news_results]
   news_results_list.each do |news_result|
     puts "#{news_result[:position] + offset * 10} - #{news_result[:title]}"
   end
@@ -207,12 +212,12 @@ this script prints the first 3 pages of the news title for the last 24h.
 ### Search Google Shopping
 
 ```ruby
-gsr = GoogleSearchResults.new({
-  q: 'cofffe', # search query
+client = GoogleSearchResults.new({
+  q: 'cofffe', # search client
   tbm: "shop", # shopping
   tbs: "tbs=p_ord:rv" # by best review
 })
-shopping_results_list = gsr.get_hash[:shopping_results]
+shopping_results_list = client.get_hash[:shopping_results]
 shopping_results_list.each do |shopping_result|
   puts "#{shopping_result[:position]} - #{shopping_result[:title]}"
 end
@@ -231,13 +236,13 @@ This code is looking for the best coffee shop per city.
     location = GoogleSearchResults.new({q: city, limit: 1}).get_location.first[:canonical_name]
 
     # get top result
-    gsr = GoogleSearchResults.new({
+    client = GoogleSearchResults.new({
       q: 'best coffee shop', 
       location: location,
       num: 1,  # number of result
       start: 0 # offset
     })
-    top_result = gsr.get_hash[:organic_results].first
+    top_result = client.get_hash[:organic_results].first
 
     puts "top coffee result for #{location} is: #{top_result[:title]}"
   end
@@ -253,15 +258,15 @@ We do offer two ways to boost your searches thanks to `async` parameter.
 company_list = %w(microsoft apple nvidia)
 
 puts "submit batch of asynchronous searches"
-gsr = GoogleSearchResults.new({async: true})
+client = GoogleSearchResults.new({async: true})
 
 search_queue = Queue.new
 company_list.each do |company|
-  # set query
-  gsr.params[:q] = company
+  # set client
+  client.params[:q] = company
 
-  # store request into a search_queue
-  search = gsr.get_hash()
+  # store request into a search_queue - no-blocker
+  client = client.get_hash()
   if search[:search_metadata][:status] =~ /Cached|Success/
     puts "#{company}: search done"
     next
@@ -272,14 +277,14 @@ company_list.each do |company|
 end
 
 puts "wait until all searches are cached or success"
-gsr = GoogleSearchResults.new
+client = GoogleSearchResults.new
 while !search_queue.empty?
-  search = search_queue.pop
+  client = search_queue.pop
   # extract search id
   search_id = search[:search_metadata][:id]
 
-  # retrieve search from the archive
-  search_archived =  gsr.get_search_archive(search_id)
+  # retrieve search from the archive - blocker
+  search_archived =  client.get_search_archive(search_id)
   if search_archived[:search_metadata][:status] =~ /Cached|Success/
     puts "#{search_archived[:search_parameters][:q]}: search done"
     next
@@ -302,7 +307,7 @@ To enable a type of search, the field tbm (to be matched) must be set to:
  * nws: Google News API.
  * shop: Google Shopping API.
  * any other Google service should work out of the box.
- * (no tbm parameter): regular Google Search.
+ * (no tbm parameter): regular Google client.
 
 The field `tbs` allows to customize the search even more.
 
