@@ -6,7 +6,7 @@ describe "Account API" do
     GoogleSearchResults.serp_api_key = ENV['API_KEY']
   end
   
-  it 'example - mock HTTP response' do
+  it 'example' do
     client = GoogleSearchResults.new
 
     if ENV['API_KEY'].nil?
