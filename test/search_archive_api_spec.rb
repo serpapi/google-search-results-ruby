@@ -28,7 +28,7 @@ describe "Search Archive API" do
     # retrieve search from archive
     client = GoogleSearchResults.new
     if GoogleSearchResults.serp_api_key.nil?
-      allow(search).to receive(:get_results) { search_response_mock }
+      allow(client).to receive(:get_results) { search_response_mock }
     end
     archive_search = client.get_search_archive(search_id)
   
