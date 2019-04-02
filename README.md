@@ -81,11 +81,11 @@ client_params = {
   safe: "Safe Search Flag",
   num: "Number of Results",
   start: "Pagination Offset",
-  serp_api_key: "Your SERP API Key",
-  tbm: "nws|isch|shop"
+  api_key: "Your SERP API Key", # see: https://serpapi.com/dashboard
+  tbm: "nws|isch|shop",
   tbs: "custom to be search criteria"
-  async: true|false # allow async 
-  output: "json|html" # output format
+  async: true|false, # allow async 
+  output: "json|html", # output format
 }
 
 # define the search client
