@@ -324,5 +324,6 @@ Contributions are welcome, feel to submit a pull request!
 To run the tests:
 
 ```bash
+export API_KEY="your api key"
 rake test
 ```
