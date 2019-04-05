@@ -72,8 +72,20 @@ class GoogleSearchResults
   # get_html
   # @return [Hash] search result Ruby hash
   #  where keys are Symbol
-  def get_hash()
+  def get_hash
     JSON.parse(get_json, {symbolize_names: true})
+  end
+
+  # alias for get_hash
+  # @deprecated
+  def get_hash_with_images
+    get_hash
+  end
+
+  # alias for get_json
+  # @deprecated
+  def get_json_with_images
+    get_json
   end
 
   # Get location using Location API
