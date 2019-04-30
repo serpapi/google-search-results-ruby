@@ -269,13 +269,13 @@ company_list.each do |company|
   client.params[:q] = company
 
   # store request into a search_queue - no-blocker
-  client = client.get_hash()
+  search = client.get_hash()
   if search[:search_metadata][:status] =~ /Cached|Success/
     puts "#{company}: search done"
     next
   end
 
-  # add search to the search_queue
+  # add result to the search queue
   search_queue.push(search)
 end
 
