@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description = "Get Google Search Results via SERP API. Hash, JSON, and HTML format supported."
   s.authors     = ["hartator"]
   s.email       = "hartator@gmail.com"
-  s.files       = ["lib/google_search_results.rb", "lib/google_search_results/hash.rb"]
+  s.files       = ["lib/google_search_results.rb"]
   s.homepage    = "https://github.com/serpapi/google-search-results-ruby"
   s.license     = "MIT"
   s.required_ruby_version = '>= 1.9.2'
