@@ -9,8 +9,7 @@ describe "Search API" do
 
   it 'get_hash' do
     hash = @client.get_hash
-    expect(hash.keys.size).to eq(10)
-    expect(hash.to_s).to match /coffee/
+    expect(hash[:organic_results].to_s).to match /coffee/
   end
 
   it 'get_json' do

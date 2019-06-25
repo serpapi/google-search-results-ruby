@@ -95,22 +95,22 @@ describe 'Batch Asynchronous search' do
       client.params[:q] = company
 
       # store request into a search_queue
-      client = client.get_hash()
-      if search[:search_metadata][:status] =~ /Cached|Success/
+      search_result = client.get_hash()
+      if search_result[:search_metadata][:status] =~ /Cached|Success/
         puts "#{company}: search done"
         next
       end
 
       # add search to the search_queue
-      search_queue.push(search)
+      search_queue.push(search_result)
     end
 
     puts "wait until all searches are cached or success"
     client = GoogleSearchResults.new
     while !search_queue.empty?
-      client = search_queue.pop
+      search_result = search_queue.pop
       # extract search id
-      search_id = search[:search_metadata][:id]
+      search_id = search_result[:search_metadata][:id]
 
       # retrieve search from the archive
       search_archived =  client.get_search_archive(search_id)
