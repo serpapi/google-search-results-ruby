@@ -4,7 +4,7 @@ describe "Baidu Search API Google" do
 
   before(:all) do
     BaiduSearchResults.serp_api_key = ENV['API_KEY']
-    @client = BaiduSearchResults.new(q: "Coffee", location: "Portland")
+    @client = BaiduSearchResults.new(q: "Coffee")
   end
 
   it 'get_hash' do

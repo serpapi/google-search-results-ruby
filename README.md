@@ -3,7 +3,8 @@
 [![Gem Version](https://badge.fury.io/rb/google_search_results.svg)](https://rubygems.org/gems/google_search_results/)
 [![Build Status](https://travis-ci.org/serpapi/google-search-results-ruby.svg?branch=master)](https://travis-ci.org/serpapi/google-search-results-ruby)
 
-This Ruby Gem is meant to scrape and parse Google results using [SerpApi](https://serpapi.com).
+This Ruby Gem is meant to scrape and parse results from Google, Bing or Baidu using [SerpApi](https://serpapi.com).
+
 The following services are provided:
  * [Search API](https://serpapi.com/search-api)
  * [Location API](https://serpapi.com/locations-api)
@@ -44,7 +45,7 @@ The Ruby class GoogleSearchResults
  - Parse JSON into Ruby Hash using JSON standard library provided by Ruby
 Et voila..
 
-## Example
+## Example with Google
  * [How to set SERP API key](#how-to-set-serp-api-key)
  * [Search API capability](#search-api-capability)
  * [Example by specification](#example-by-specification)
@@ -56,6 +57,13 @@ Et voila..
  * [Search Google Shopping](#search-google-shopping)
  * [Google Search By Location](#google-search-by-location)
  * [Batch Asynchronous search](#batch-asynchronous-search)
+
+## Bing search
+ * [Bing search API](#bing-search-api)
+
+## Baidu search
+ * [Baidu search API](#baidu-search-api)
+
 
 ### How to set SERP API key
 The Serp API key can be set globally using a singleton pattern.
@@ -301,6 +309,22 @@ search_queue.close
 puts 'all searches completed'
   ```
 This code shows a simple implementation to run a batch of asynchronously searches.
+
+## Bing search API
+
+```ruby
+GoogleSearchResults.serp_api_key = ""
+client = GoogleSearchResults.new(q: "Coffee", location: "Portland")
+pp client.get_hash
+```
+
+## Baidu search API
+
+```ruby
+BaiduSearchResults.serp_api_key = ""
+client = BaiduSearchResults.new(q: "Coffee")
+pp client.get_hash
+```
 
 ## Conclusion
 Serp API supports Google Images, News, Shopping and more..

@@ -4,7 +4,7 @@ describe "Bing Search API" do
 
   before(:all) do
     GoogleSearchResults.serp_api_key = ENV['API_KEY']
-    @client = GoogleSearchResults.new(q: "Coffee", location: "Portland", engine: "Bing")
+    @client = GoogleSearchResults.new(q: "Coffee", location: "Portland")
   end
 
   it 'get_hash' do
