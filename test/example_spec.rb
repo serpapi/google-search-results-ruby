@@ -1,6 +1,6 @@
 require_relative '../lib/google_search_results'
 
-if ENV['API_KEY']
+if ENV['API_KEY'] && GOOGLE_ENGINE == 'google'
   
 GoogleSearchResults.serp_api_key = ENV['API_KEY']
 
@@ -120,7 +120,7 @@ describe 'Batch Asynchronous search' do
       end
 
       # add back the search
-      search_queue.push(search)
+      search_queue.push(search_result)
     end
 
     search_queue.close

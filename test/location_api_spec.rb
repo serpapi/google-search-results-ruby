@@ -13,8 +13,6 @@ describe "Location API" do
 
     first = location_list.first
     expect(first[:id]).to  eq('585069bdee19ad271e9bc072')
-    expect(first[:google_id]).to eq(200635)
-    expect(first[:google_parent_id]).to eq(21176)
     expect(first[:name]).to eq("Austin, TX")
     expect(first[:country_code]).to eq("US")
     expect(first[:target_type]).to eq("DMA Region")
@@ -22,6 +20,11 @@ describe "Location API" do
     expect(first[:gps]).to eq([-97.7430608, 30.267153])
     expect(first[:keys]).to eq(["austin", "tx", "texas", "united", "states"])
     expect(first[:canonical_name]).to eq("Austin,TX,Texas,United States")
+
+    if client.engine == 'google'
+      expect(first[:google_id]).to eq(200635)
+      expect(first[:google_parent_id]).to eq(21176)
+    end
   end
 
 end

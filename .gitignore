@@ -31,3 +31,4 @@ test.rb
 .vscode
 
 Gemfile.lock
+build_table.rb
