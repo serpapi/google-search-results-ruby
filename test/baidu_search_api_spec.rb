@@ -11,8 +11,8 @@ describe "Baidu Search API Google" do
     hash = @client.get_hash
     expect(hash[:search_metadata][:status]).to eq('Success')
     #expect(hash[:search_metadata][:baidu_url]).to match(/www.baidu.com/)
-    expect(hash[:organic_results].size).to be >7
-    expect(hash[:organic_results].to_s).to match /coffee/
+    expect(hash[:organic_results][:places].size).to be >7
+    expect(hash[:organic_results][:places].to_s).to match /coffee/
     # expect(hash[:pagination]).not_to be_empty
   end
 
