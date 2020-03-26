@@ -87,7 +87,7 @@ describe 'Batch Asynchronous search' do
     company_list = %w(microsoft apple nvidia)
   
     puts "submit batch asynchronous search"
-    client = GoogleSearchResults.new({async: true})
+    client = GoogleSearchResults.new({async: true, q: company_list.first})
 
     search_queue = Queue.new
     company_list.each do |company|

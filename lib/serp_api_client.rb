@@ -4,17 +4,18 @@ require 'json'
 GOOGLE_ENGINE = 'google'
 BAIDU_ENGINE = 'baidu'
 BING_ENGINE = 'bing'
+YAHOO_ENGINE = 'yahoo'
+YANDEX_ENGINE = 'yandex'
+EBAY_ENGINE = 'ebay'
 
+
+# Generic serpapi.com client
+#  which allow to custom cutting edge search service
+#   by setting the engine paremeter.
 class SerpApiClient
 
   VERSION = "1.4.0"
   BACKEND = "serpapi.com"
-
-  @@serp_api_key = nil
-
-  class << self
-    attr_accessor :serp_api_key
-  end
 
   attr_accessor :params
 
@@ -22,15 +23,18 @@ class SerpApiClient
   #
   # Usage
   # ---
-  # ```require 'google_search_results'
-  # client = GoogleSearchResults.new({q: "coffee", serp_api_key: "Your SERP API Key")
-  # result = client.get_json```
   #
-  # @param [Hash] params
-  # @param [String] engine: 'google' # baidu|google|bing
+  # ```ruby
+  # require 'google_search_results'
+  # client = SerpApiClient.new({q: "coffee", api_key: "secure API key"}, "google")
+  # result = client.get_json
+  # ```
+  #
+  # @param [Hash] params contains requested parameter
+  # @param [String] engine google|baidu|google|bing|ebay|yandex
   def initialize(params, engine)
     @params = params
-    @params[:engine] = engine
+    @params[:engine] ||= engine
   end
 
   # get_json 
@@ -90,27 +94,75 @@ class SerpApiClient
 
   def construct_url(path)
     @params[:source] = "ruby"
-    if GoogleSearchResults.serp_api_key
-      @params[:serp_api_key] ||= GoogleSearchResults.serp_api_key
-    end
-    if @params[:serp_api_key].nil?
-      @params.delete(:serp_api_key)
+    if !$serp_api_key.nil?
+      @params[:api_key] = $serp_api_key
     end
 
+    @params.delete_if { |key, value| value.nil? }
+
     URI::HTTPS.build(host: BACKEND, path: path, query: URI.encode_www_form(@params))
+  end
+
+  # serp_api_key
+  # legacy implementation.
+  #
+  # @param [String] api_key set user secret API key (copy/paste from https://serpapi.com/dashboard)
+  def self.serp_api_key=(api_key)
+    self.api_key = api_key
+  end
+
+  # api_key
+  # @param [String] api_key set user secret API key (copy/paste from https://serpapi.com/dashboard)
+  def self.api_key=(api_key)
+    $serp_api_key = api_key
+  end
+
+  # @return [String] api_key for this client
+  def api_key
+    @params[:api_key] || @params[:serp_api_key] || $serp_api_key
   end
 
   private
 
   def get_results(path)
     begin
-      open(construct_url(path), read_timeout: 600).read
+      url = construct_url(path)
+      open(url, read_timeout: 600).read
     rescue OpenURI::HTTPError => e
       if error = JSON.load(e.io.read)["error"]
+        puts "server returns error for url: #{url}"
         raise error
       else
+        puts "fail: fetch url: #{url}"
         raise e
       end
+    rescue => e
+      puts "fail: fetch url: #{url}"
+      raise e
+    end
+  end
+
+  def check_params(keys = [])
+    return if @params.keys == [:engine]
+
+    raise 'keys must be a list of String or Symbol' unless keys.class == Array
+    missing = []
+    keys.each do |key|
+      case key.class.to_s
+      when 'String'
+        if @params[key].nil? and @params[key.to_sym].nil?
+          missing << "#{key}"
+        end
+      when 'Symbol'
+        if @params[key].nil? and @params[key.to_s].nil?
+          missing << "#{key}"
+        end
+      else
+        raise 'keys must contains Symbol or String'
+      end
+    end
+    if missing.size > 0
+      raise "missing required keys in params.\n #{missing.join(",")}"
     end
   end
 

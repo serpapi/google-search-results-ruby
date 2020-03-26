@@ -24,8 +24,6 @@ describe "Google Search API Google" do
 
 end
 
-
-
 describe 'low level' do
 
   it 'construct_url' do

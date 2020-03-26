@@ -3,7 +3,7 @@ require_relative '../lib/google_search_results'
 describe "Account API" do
 
   before(:all) do
-    GoogleSearchResults.serp_api_key = ENV['API_KEY']
+    GoogleSearchResults.api_key = ENV['API_KEY']
   end
   
   it 'example' do

@@ -3,4 +3,4 @@
 all: test
 
 test:
-	rspec test
+	rake test

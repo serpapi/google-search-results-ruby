@@ -1,9 +1,10 @@
 require_relative 'serp_api_client'
 
-# Google Search Result for Ruby powered by SerpAPI
+# Google Search Result for Ruby powered by SerpApi
 #
 # Search API Usage
-# ```
+#
+# ```ruby
 # parameter = {
 #   q: "query",
 #   google_domain: "Google Domain", 
@@ -25,6 +26,7 @@ require_relative 'serp_api_client'
 # html_results = client.get_html
 # hash_results = client.get_hash
 # json_results = client.get_json
+#
 # ```
 #
 # doc: https://serpapi.com/search-api
@@ -33,6 +35,7 @@ class GoogleSearchResults < SerpApiClient
 
   def initialize(params = {})
     super(params, GOOGLE_ENGINE)
+    check_params([:q, :engine])
   end
 
 end

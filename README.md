@@ -6,14 +6,13 @@
 This Ruby Gem is meant to scrape and parse results from Google, Bing or Baidu using [SerpApi](https://serpapi.com).
 
 The following services are provided:
- * [Search API](https://serpapi.com/search-api)
- * [Location API](https://serpapi.com/locations-api)
- * [Search Archive API](https://serpapi.com/search-archive-api)
- * [Account API](https://serpapi.com/account-api)
 
-Serp API provides a [script builder](https://serpapi.com/demo) to get you started quickly.
+  * [Search API](https://serpapi.com/search-api)
+  * [Location API](https://serpapi.com/locations-api)
+  * [Search Archive API](https://serpapi.com/search-archive-api)
+  * [Account API](https://serpapi.com/account-api)
 
-Feel free to fork this repository to add more backends.
+SerpApi.com provides a [script builder](https://serpapi.com/demo) to get you started quickly.
 
 ## Installation
 
@@ -29,21 +28,30 @@ $ gem install google_search_results
 
 ```ruby
 require 'google_search_results'
-client = GoogleSearchResults.new(q: "coffee", serp_api_key: "secret_api_key" )
+client = GoogleSearchResults.new(q: "coffee", serp_api_key: "secret_api_key")
 hash_results = client.get_hash
  ```
 
 This example runs a search about "coffee" using your secret api key.
 
-The Serp API service (backend)
+The SerpApi.com service (backend)
  - searches on Google using the client: q = "coffee"
  - parses the messy HTML responses
  - return a standardizes JSON response
-The Ruby class GoogleSearchResults
- - Format the request to Serp API server
+The class GoogleSearchResults
+ - Format the request to SerpApi.com server
  - Execute GET http request
  - Parse JSON into Ruby Hash using JSON standard library provided by Ruby
 Et voila..
+
+Alternatively, you can search:
+ - Bing using BingSearchResults class
+ - Baidu using BaiduSearchResults class
+ - Yahoo using YahooSearchResults class
+ - Yandex using YandexSearchResults class
+ - Ebay using EbaySearchResults class
+
+See the [playground to generate your code.](https://serpapi.com/playground)
 
 ## Example with Google
  * [How to set SERP API key](#how-to-set-serp-api-key)
@@ -66,18 +74,18 @@ Et voila..
 
 
 ### How to set SERP API key
-The Serp API key can be set globally using a singleton pattern.
+The SerpApi.com key can be set globally using a singleton pattern.
 ```ruby
 GoogleSearchResults.serp_api_key = "secret_api_key"
 client = GoogleSearchResults.new(q: "coffee")
 ```
 
-The Serp API key can be provided for each client.
+The SerpApi.com key can be provided for each client.
 ```ruby
 client = GoogleSearchResults.new(q: "coffee", serp_api_key: "secret_api_key")
 ```
 
-### Search API capability
+### Search API capability for Google
 ```ruby
 client_params = {
   q: "client",
@@ -111,9 +119,11 @@ hash_results = client.get_hash
 json_results = client.get_json
 ```
 
-(the full documentation)[https://serpapi.com/search-api]
+(the full documentation)[https://serpapi.com/search-api].
 
-see below for more hands on examples.
+More search API are documented on SerpApi.com
+
+You will find more hands on examples below.
 
 ### Example by specification
 
@@ -238,7 +248,7 @@ this script prints all the shopping results order by review order with position.
 
 ### Google Search By Location
 
-With Serp API, we can build Google search from anywhere in the world.
+With SerpApi.com, we can build Google search from anywhere in the world.
 This code is looking for the best coffee shop per city.
 
 ```ruby
@@ -327,7 +337,7 @@ pp client.get_hash
 ```
 
 ## Conclusion
-Serp API supports Google Images, News, Shopping and more..
+SerpApi.com supports Google Images, News, Shopping and more..
 To enable a type of search, the field tbm (to be matched) must be set to:
 
  * isch: Google Images API.

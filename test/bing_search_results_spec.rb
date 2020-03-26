@@ -3,8 +3,8 @@ require_relative '../lib/bing_search_results'
 describe "Bing Search API" do
 
   before(:all) do
-    GoogleSearchResults.serp_api_key = ENV['API_KEY']
-    @client = GoogleSearchResults.new(q: "Coffee", location: "Portland")
+    BingSearchResults.serp_api_key = ENV['API_KEY']
+    @client = BingSearchResults.new(q: "Coffee", location: "Portland")
   end
 
   it 'get_hash' do
