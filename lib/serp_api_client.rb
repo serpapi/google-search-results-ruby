@@ -14,7 +14,7 @@ EBAY_ENGINE = 'ebay'
 #   by setting the engine paremeter.
 class SerpApiClient
 
-  VERSION = "1.4.0"
+  VERSION = "1.3.0"
   BACKEND = "serpapi.com"
 
   attr_accessor :params

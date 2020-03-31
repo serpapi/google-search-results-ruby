@@ -2,7 +2,7 @@ require './lib/google_search_results'
 
 Gem::Specification.new do |s|
   s.name        = "google_search_results"
-  s.version     = GoogleSearchResults::VERSION
+  s.version     = SerpApiClient::VERSION
   s.summary     = "Get Google, Bing, Baidu, Ebay, Yahoo, Yandex Search Results via SerpApi.com"
   s.description = "Scape localized search results from search engine using SerpApi.com and returns Hash, JSON, raw HTML"
   s.authors     = ["hartator", "jvmvik"]
