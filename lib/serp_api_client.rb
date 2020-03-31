@@ -73,18 +73,18 @@ class SerpApiClient
 
   # Get location using Location API
   def get_location
-    JSON.parse(get_results('/locations.json'), {symbolize_names: true})
+    as_json(get_results('/locations.json'))
   end
 
   # Retrieve search result from the Search Archive API
   def get_search_archive(search_id, format = 'json')
     raise 'format must be json or html' if format !~ /^(html|json)$/
-    JSON.parse(get_results("/searches/#{search_id}.#{format}"), {symbolize_names: true})
+    as_json(get_results("/searches/#{search_id}.#{format}"))
   end
 
    # Get account information using Account API
-   def get_account
-    JSON.parse(get_results('/account'), {symbolize_names: true})
+  def get_account
+    as_json(get_results('/account'))
   end
 
   # @return [String] current search engine
@@ -98,7 +98,7 @@ class SerpApiClient
       @params[:api_key] = $serp_api_key
     end
 
-    @params.delete_if { |key, value| value.nil? }
+    @params.delete_if { |_, value| value.nil? }
 
     URI::HTTPS.build(host: BACKEND, path: path, query: URI.encode_www_form(@params))
   end
@@ -124,10 +124,14 @@ class SerpApiClient
 
   private
 
+  def as_json(data)
+    JSON.parse(data, symbolize_names: true)
+  end
+
   def get_results(path)
     begin
       url = construct_url(path)
-      open(url, read_timeout: 600).read
+      URI::open(url, read_timeout: 600).read
     rescue OpenURI::HTTPError => e
       if error = JSON.load(e.io.read)["error"]
         puts "server returns error for url: #{url}"
@@ -150,19 +154,23 @@ class SerpApiClient
     keys.each do |key|
       case key.class.to_s
       when 'String'
-        if @params[key].nil? and @params[key.to_sym].nil?
-          missing << "#{key}"
+        if @params[key].nil?
+          if @params[key.to_sym].nil?
+            missing << key.to_s
+          end
         end
       when 'Symbol'
-        if @params[key].nil? and @params[key.to_s].nil?
-          missing << "#{key}"
+        if @params[key].nil?
+          if @params[key.to_s].nil?
+            missing << key.to_s
+          end
         end
       else
         raise 'keys must contains Symbol or String'
       end
     end
-    if missing.size > 0
-      raise "missing required keys in params.\n #{missing.join(",")}"
+    if !missing.empty?
+      raise "missing required keys in params.\n #{missing.join(',')}"
     end
   end
 

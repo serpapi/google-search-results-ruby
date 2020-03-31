@@ -26,11 +26,9 @@ require_relative 'serp_api_client'
 # html_results = client.get_html
 # hash_results = client.get_hash
 # json_results = client.get_json
-#
 # ```
 #
 # doc: https://serpapi.com/search-api
-
 class GoogleSearchResults < SerpApiClient
 
   def initialize(params = {})
