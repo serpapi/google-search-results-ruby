@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake', '~> 13.0.1'
   s.add_development_dependency 'rspec', '~> 3.9'
   s.add_development_dependency 'yard', '~> 0.9.24'
-  s.add_development_dependency 'rubocop', '~> 0.39.0'
+  s.add_development_dependency 'rubocop', '~> 0.49.1'
   s.metadata["yard.run"] = "yri"
 end
 
