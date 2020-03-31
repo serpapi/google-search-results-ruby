@@ -3,8 +3,8 @@ require_relative '../lib/google_search_results'
 describe "Google Search API Google" do
 
   before(:all) do
-    GoogleSearchResults.serp_api_key = ENV['API_KEY']
-    @client = GoogleSearchResults.new(q: "Coffee", location: "Portland")
+    SerpApiClient.serp_api_key = ENV['API_KEY']
+    @client = SerpApiClient.new({q: "Coffee", location: "Portland"}, "google")
   end
 
   it 'get_hash' do
@@ -27,13 +27,13 @@ end
 describe 'low level' do
 
   it 'construct_url' do
-    GoogleSearchResults.serp_api_key = nil
-    client = GoogleSearchResults.new(q: "Coffee", location: "Portland", serp_api_key: nil)
+    SerpApiClient.serp_api_key = nil
+    client = SerpApiClient.new({q: "Coffee", location: "Portland", serp_api_key: nil}, 'google')
     expect(client.construct_url('/search').to_s).to eq("https://serpapi.com/search?q=Coffee&location=Portland&engine=google&source=ruby")
   end
 
   it 'construct_url' do
-    client = GoogleSearchResults.new(q: "Coffee", location: "Portland", serp_api_key: 'hello_world')
+    client = SerpApiClient.new({q: "Coffee", location: "Portland", serp_api_key: 'hello_world'}, 'google')
     expect(client.construct_url('/search').to_s).to eq("https://serpapi.com/search?q=Coffee&location=Portland&serp_api_key=hello_world&engine=google&source=ruby")
   end
 
