@@ -9,8 +9,9 @@ describe 'Search Google Images' do
   it 'this script prints all the images links and download.' do
     client = GoogleSearchResults.new(q: 'coffee', tbm: "isch")
     image_results_list = client.get_hash[:images_results]
-    image_results_list.each do |image_result|
-      puts ' - ' + image_result[:original]
+    image_results_list.each_with_index do |image_result, index|
+      next if image_result.nil?
+      puts " #{index}> #{image_result[:original]}"
       # to download the image:
       # `wget #{image_result[:original]}`
     end
@@ -87,7 +88,7 @@ describe 'Batch Asynchronous search' do
     company_list = %w(microsoft apple nvidia)
   
     puts "submit batch asynchronous search"
-    client = GoogleSearchResults.new({async: true, q: company_list.first})
+    client = GoogleSearchResults.new({async: true, q: company_list.first })
 
     search_queue = Queue.new
     company_list.each do |company|
@@ -105,9 +106,9 @@ describe 'Batch Asynchronous search' do
       search_queue.push(search_result)
     end
 
-    puts "wait until all searches are cached or success"
+    puts 'wait until all searches are cached or success'
     client = GoogleSearchResults.new
-    while !search_queue.empty?
+    until search_queue.empty?
       search_result = search_queue.pop
       # extract search id
       search_id = search_result[:search_metadata][:id]
