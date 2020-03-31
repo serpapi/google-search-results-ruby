@@ -16,7 +16,7 @@ SerpApi.com provides a [script builder](https://serpapi.com/demo) to get you sta
 
 ## Installation
 
-Ruby 2.1+ must be already installed:
+Ruby 2.5+ must be already installed:
 
 ```bash
 $ gem install google_search_results
@@ -53,7 +53,7 @@ Alternatively, you can search:
 
 See the [playground to generate your code.](https://serpapi.com/playground)
 
-## Example with Google
+## Summary
  * [How to set SERP API key](#how-to-set-serp-api-key)
  * [Search API capability](#search-api-capability)
  * [Example by specification](#example-by-specification)
@@ -65,14 +65,9 @@ See the [playground to generate your code.](https://serpapi.com/playground)
  * [Search Google Shopping](#search-google-shopping)
  * [Google Search By Location](#google-search-by-location)
  * [Batch Asynchronous search](#batch-asynchronous-search)
+ * [Supported search engine](#supported-search-engine)
 
-## Bing search
- * [Bing search API](#bing-search-api)
-
-## Baidu search
- * [Baidu search API](#baidu-search-api)
-
-
+## Guide
 ### How to set SERP API key
 The SerpApi.com key can be set globally using a singleton pattern.
 ```ruby
@@ -320,7 +315,9 @@ puts 'all searches completed'
   ```
 This code shows a simple implementation to run a batch of asynchronously searches.
 
-## Bing search API
+
+## Supported search engine
+### Google search API
 
 ```ruby
 GoogleSearchResults.serp_api_key = ""
@@ -328,13 +325,69 @@ client = GoogleSearchResults.new(q: "Coffee", location: "Portland")
 pp client.get_hash
 ```
 
-## Baidu search API
+https://serpapi.com/search-api
+
+### Bing search API
+
+```ruby
+BingSearchResults.serp_api_key = ""
+client = BingSearchResults.new(q: "Coffee", location: "Portland")
+pp client.get_hash
+```
+
+https://serpapi.com/bing-search-api
+
+### Baidu search API
 
 ```ruby
 BaiduSearchResults.serp_api_key = ""
 client = BaiduSearchResults.new(q: "Coffee")
 pp client.get_hash
 ```
+
+https://serpapi.com/baidu-search-api
+
+### Yahoo search API
+
+```ruby
+YahooSearchResults.serp_api_key = ""
+client = YahooSearchResults.new(q: "Coffee")
+pp client.get_hash
+```
+
+https://serpapi.com/yahoo-search-api
+
+### Yandex search API
+
+```ruby
+YandexSearchResults.serp_api_key = ""
+client = YandexSearchResults.new(q: "Coffee")
+pp client.get_hash
+```
+
+https://serpapi.com/yandex-search-api
+
+### Ebay search API
+
+```ruby
+EbaySearchResults.serp_api_key = ""
+client = EbaySearchResults.new(q: "Coffee")
+pp client.get_hash
+```
+
+https://serpapi.com/ebay-search-api
+
+### Generic SerpApi client
+```ruby
+SerpApiClient.serp_api_key = ENV['API_KEY']
+engine = 'google'
+query = {q: "Coffee", location: "Portland"}
+client = SerpApiClient.new(query, engine)
+hash = client.get_hash
+pp hash[:organic_results]
+```
+
+see: google-search-results-ruby/test/search_api_spec.rb
 
 ## Conclusion
 SerpApi.com supports Google Images, News, Shopping and more..
