@@ -1,9 +1,9 @@
 require 'rake'
 require 'rspec/core/rake_task'
-
+require 'rubocop/rake_task'
 require 'yard'
 
-YARD::Rake::YardocTask.new do |t|
+YARD::Rake::YardocTask.new(:doc) do |t|
  t.files   = ['lib/*.rb']
  t.options = ['--markup=markdown']
  t.stats_options = ['--list-undoc']
@@ -14,4 +14,8 @@ RSpec::Core::RakeTask.new(:test) do |t|
   t.rspec_opts = '--format documentation'
 end
 
-task :default => :test
+RuboCop::RakeTask.new(:lint) do |t|
+  t.options = ['--display-cop-names']
+end
+
+task :default => [:doc, :test]

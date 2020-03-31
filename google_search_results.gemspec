@@ -3,8 +3,8 @@ require './lib/google_search_results'
 Gem::Specification.new do |s|
   s.name        = "google_search_results"
   s.version     = GoogleSearchResults::VERSION
-  s.summary     = "Get Google, Bing, Baidu Search Results via SerpApi.com"
-  s.description = "Scape localized search result for Google, Bing, Baidu using SerpApi.com and returns Hash, JSON, raw HTML"
+  s.summary     = "Get Google, Bing, Baidu, Ebay, Yahoo, Yandex Search Results via SerpApi.com"
+  s.description = "Scape localized search results from search engine using SerpApi.com and returns Hash, JSON, raw HTML"
   s.authors     = ["hartator", "jvmvik"]
   s.email       = "hartator@gmail.com"
   s.files       = [
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake', '~> 13.0.1'
   s.add_development_dependency 'rspec', '~> 3.9'
   s.add_development_dependency 'yard', '~> 0.9.24'
+  s.add_development_dependency 'rubocop', '~> 0.39.0'
   s.metadata["yard.run"] = "yri"
 end
 
