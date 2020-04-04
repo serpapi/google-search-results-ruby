@@ -53,31 +53,45 @@ Alternatively, you can search:
 
 See the [playground to generate your code.](https://serpapi.com/playground)
 
-## Summary
- * [How to set SERP API key](#how-to-set-serp-api-key)
- * [Search API capability](#search-api-capability)
- * [Example by specification](#example-by-specification)
- * [Location API](#location-api)
- * [Search Archive API](#search-archive-api)
- * [Account API](#account-api)
- * [Search Google Images](#search-google-images)
- * [Search Google News](#search-google-news)
- * [Search Google Shopping](#search-google-shopping)
- * [Google Search By Location](#google-search-by-location)
- * [Batch Asynchronous search](#batch-asynchronous-search)
- * [Supported search engine](#supported-search-engine)
+# Summary
+- [Google Search Results in Ruby](#google-search-results-in-ruby)
+  - [Installation](#installation)
+  - [Quick start](#quick-start)
+- [Summary](#summary)
+  - [Guide](#guide)
+    - [How to set SERP API key](#how-to-set-serp-api-key)
+    - [Search API capability for Google](#search-api-capability-for-google)
+    - [Example by specification](#example-by-specification)
+    - [Location API](#location-api)
+    - [Search Archive API](#search-archive-api)
+    - [Account API](#account-api)
+    - [Search Google Images](#search-google-images)
+    - [Search Google News](#search-google-news)
+    - [Search Google Shopping](#search-google-shopping)
+    - [Google Search By Location](#google-search-by-location)
+    - [Batch Asynchronous search](#batch-asynchronous-search)
+  - [Supported search engine](#supported-search-engine)
+    - [Google search API](#google-search-api)
+    - [Bing search API](#bing-search-api)
+    - [Baidu search API](#baidu-search-api)
+    - [Yahoo search API](#yahoo-search-api)
+    - [Yandex search API](#yandex-search-api)
+    - [Ebay search API](#ebay-search-api)
+    - [Generic SerpApi client](#generic-serpapi-client)
+  - [Conclusion](#conclusion)
+  - [Contributing](#contributing)
 
 ## Guide
 ### How to set SERP API key
 The SerpApi.com key can be set globally using a singleton pattern.
 ```ruby
-GoogleSearchResults.serp_api_key = "secret_api_key"
+GoogleSearchResults.api_key = "secret_api_key"
 client = GoogleSearchResults.new(q: "coffee")
 ```
 
 The SerpApi.com key can be provided for each client.
 ```ruby
-client = GoogleSearchResults.new(q: "coffee", serp_api_key: "secret_api_key")
+client = GoogleSearchResults.new(q: "coffee", api_key: "secret_api_key")
 ```
 
 ### Search API capability for Google
@@ -121,7 +135,6 @@ More search API are documented on SerpApi.com
 You will find more hands on examples below.
 
 ### Example by specification
-
 We love true open source, continuous integration and Test Drive Development (TDD). 
  We are using RSpec to test [our infrastructure around the clock](https://travis-ci.org/serpapi/google-search-results-ruby) to achieve the best QoS (Quality Of Service).
  
@@ -133,13 +146,19 @@ export API_KEY="your secret key"
 ```
 
 Install RSpec
-```gem install rspec```
+```bash
+gem install rspec
+```
 
 To run the test:
-```rspec test```
+```bash
+rspec test
+```
 
 or if you prefers Rake
-```rake test```
+```bash
+rake test
+```
 
 ### Location API
 
@@ -164,9 +183,8 @@ it prints the first 3 location matching Austin (Texas, Texas, Rochester)
 ```
 
 ### Search Archive API
-
-
-a search to get a search_id.
+This API allows to retrieve previous search.
+To do so run a search to save a search_id.
 ```ruby
 client = GoogleSearchResults.new(q: "Coffee", location: "Portland")
 original_client = client.get_hash
@@ -196,10 +214,9 @@ client = GoogleSearchResults.new(q: 'cofffe', tbm: "isch")
 image_results_list = client.get_hash[:images_results]
 image_results_list.each do |image_result|
   puts image_result[:original]
-  # to download the image:
-  # `wget #{image_result[:original]}`
 end
 ```
+To download the image: `wget #{image_result[:original]}`
 
 this code prints all the images links, 
  and download image if you un-comment the line with wget (linux/osx tool to download image).
@@ -390,7 +407,7 @@ pp hash[:organic_results]
 see: google-search-results-ruby/test/search_api_spec.rb
 
 ## Conclusion
-SerpApi.com supports Google Images, News, Shopping and more..
+SerpApi supports all the major search engines. Google has the more advance support with all the major services available: Images, News, Shopping and more..
 To enable a type of search, the field tbm (to be matched) must be set to:
 
  * isch: Google Images API.
