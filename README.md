@@ -397,9 +397,8 @@ https://serpapi.com/ebay-search-api
 ### Generic SerpApi client
 ```ruby
 SerpApiClient.serp_api_key = ENV['API_KEY']
-engine = 'google'
-query = {q: "Coffee", location: "Portland"}
-client = SerpApiClient.new(query, engine)
+query = {search_query: "Coffee", engine: "youtube"}
+client = SerpApiClient.new(query)
 hash = client.get_hash
 pp hash[:organic_results]
 ```
