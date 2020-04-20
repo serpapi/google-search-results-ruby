@@ -9,17 +9,17 @@ describe "Google Search API Google" do
 
   it 'get_hash' do
     hash = @client.get_hash
-    expect(hash[:organic_results].to_s).to match /coffee/
+    expect(hash[:organic_results].to_s).to match /coffee/i
   end
 
   it 'get_json' do
     json = @client.get_json
     expect(json.size).to be > 10000
-    expect(json).to match /coffee/
+    expect(json).to match /coffee/i
   end
 
   it 'get_html' do
-    expect(@client.get_html).to match /coffee/
+    expect(@client.get_html).to match /coffee/i
   end
 
 end
