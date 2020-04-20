@@ -2,7 +2,7 @@ require_relative '../lib/google_search_results'
 
 if ENV['API_KEY'] && GOOGLE_ENGINE == 'google'
   
-GoogleSearchResults.serp_api_key = ENV['API_KEY']
+GoogleSearchResults.api_key = ENV['API_KEY']
 
 describe 'Search Google Images' do
 

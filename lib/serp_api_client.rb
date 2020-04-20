@@ -14,7 +14,7 @@ EBAY_ENGINE = 'ebay'
 #   by setting the engine paremeter.
 class SerpApiClient
 
-  VERSION = "1.3.0"
+  VERSION = "1.3.1"
   BACKEND = "serpapi.com"
 
   attr_accessor :params
@@ -26,15 +26,16 @@ class SerpApiClient
   #
   # ```ruby
   # require 'google_search_results'
-  # client = SerpApiClient.new({q: "coffee", api_key: "secure API key"}, "google")
+  # client = SerpApiClient.new({q: "coffee", api_key: "secure API key", engine: "google"})
   # result = client.get_json
   # ```
   #
   # @param [Hash] params contains requested parameter
-  # @param [String] engine google|baidu|google|bing|ebay|yandex
-  def initialize(params, engine)
+  # @param [String] engine google|baidu|google|bing|ebay|yandex (optional or can be set in params)
+  def initialize(params, engine = nil)
     @params = params
     @params[:engine] ||= engine
+    raise 'engine must be defined in params or a second argument' if @params[:engine].nil?
   end
 
   # get_json 

@@ -3,7 +3,7 @@ require_relative '../lib/google_search_results'
 describe "Location API" do
 
   before(:all) do
-    GoogleSearchResults.serp_api_key = nil
+    GoogleSearchResults.api_key = nil
   end
   
   it 'example' do

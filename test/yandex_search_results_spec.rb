@@ -3,7 +3,7 @@ require_relative '../lib/yandex_search_results'
 describe "Yandex Search API" do
 
   before(:all) do
-    YandexSearchResults.serp_api_key = ENV['API_KEY']
+    YandexSearchResults.api_key = ENV['API_KEY']
     @client = YandexSearchResults.new(text: "Coffee")
   end
 

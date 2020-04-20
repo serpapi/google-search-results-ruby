@@ -337,7 +337,7 @@ This code shows a simple implementation to run a batch of asynchronously searche
 ### Google search API
 
 ```ruby
-GoogleSearchResults.serp_api_key = ""
+GoogleSearchResults.api_key = ""
 client = GoogleSearchResults.new(q: "Coffee", location: "Portland")
 pp client.get_hash
 ```
@@ -347,7 +347,7 @@ https://serpapi.com/search-api
 ### Bing search API
 
 ```ruby
-BingSearchResults.serp_api_key = ""
+BingSearchResults.api_key = ""
 client = BingSearchResults.new(q: "Coffee", location: "Portland")
 pp client.get_hash
 ```
@@ -357,7 +357,7 @@ https://serpapi.com/bing-search-api
 ### Baidu search API
 
 ```ruby
-BaiduSearchResults.serp_api_key = ""
+BaiduSearchResults.api_key = ""
 client = BaiduSearchResults.new(q: "Coffee")
 pp client.get_hash
 ```
@@ -367,8 +367,8 @@ https://serpapi.com/baidu-search-api
 ### Yahoo search API
 
 ```ruby
-YahooSearchResults.serp_api_key = ""
-client = YahooSearchResults.new(q: "Coffee")
+YahooSearchResults.api_key = ""
+client = YahooSearchResults.new(p: "Coffee")
 pp client.get_hash
 ```
 
@@ -377,8 +377,8 @@ https://serpapi.com/yahoo-search-api
 ### Yandex search API
 
 ```ruby
-YandexSearchResults.serp_api_key = ""
-client = YandexSearchResults.new(q: "Coffee")
+YandexSearchResults.api_key = ""
+client = YandexSearchResults.new(text: "Coffee")
 pp client.get_hash
 ```
 
@@ -387,17 +387,21 @@ https://serpapi.com/yandex-search-api
 ### Ebay search API
 
 ```ruby
-EbaySearchResults.serp_api_key = ""
-client = EbaySearchResults.new(q: "Coffee")
+EbaySearchResults.api_key = ""
+client = EbaySearchResults.new(_nkw: "Coffee")
 pp client.get_hash
 ```
 
 https://serpapi.com/ebay-search-api
 
 ### Generic SerpApi client
+
 ```ruby
-SerpApiClient.serp_api_key = ENV['API_KEY']
-query = {search_query: "Coffee", engine: "youtube"}
+SerpApiClient.api_key = ENV['API_KEY']
+query = {
+  p: "Coffee", 
+  engine: "youtube"
+}
 client = SerpApiClient.new(query)
 hash = client.get_hash
 pp hash[:organic_results]

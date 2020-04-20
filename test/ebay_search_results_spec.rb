@@ -3,7 +3,7 @@ require_relative '../lib/ebay_search_results'
 describe "Ebay Search API" do
 
   before(:all) do
-    EbaySearchResults.serp_api_key = ENV['API_KEY']
+    EbaySearchResults.api_key = ENV['API_KEY']
     @client = EbaySearchResults.new(_nkw: "Coffee")
   end
 

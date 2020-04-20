@@ -3,7 +3,7 @@ require_relative '../lib/baidu_search_results'
 describe "Baidu Search API Google" do
 
   before(:all) do
-    BaiduSearchResults.serp_api_key = ENV['API_KEY']
+    BaiduSearchResults.api_key = ENV['API_KEY']
     @client = BaiduSearchResults.new(q: "Coffee")
   end
 

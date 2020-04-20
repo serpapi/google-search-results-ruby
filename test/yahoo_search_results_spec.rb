@@ -3,7 +3,7 @@ require_relative '../lib/yahoo_search_results'
 describe "Yahoo Search API" do
 
   before(:all) do
-    YahooSearchResults.serp_api_key = ENV['API_KEY']
+    YahooSearchResults.api_key = ENV['API_KEY']
     @client = YahooSearchResults.new(p: "Coffee")
   end
 
