@@ -9,12 +9,11 @@ YANDEX_ENGINE = 'yandex'
 EBAY_ENGINE = 'ebay'
 
 
-# Generic serpapi.com client
-#  which allow to custom cutting edge search service
-#   by setting the engine paremeter.
+# Generic HTTP client for serpapi.com
+#
 class SerpApiClient
 
-  VERSION = "1.3.1"
+  VERSION = "1.3.2"
   BACKEND = "serpapi.com"
 
   attr_accessor :params
@@ -26,8 +25,8 @@ class SerpApiClient
   #
   # ```ruby
   # require 'google_search_results'
-  # client = SerpApiClient.new({q: "coffee", api_key: "secure API key", engine: "google"})
-  # result = client.get_json
+  # search = SerpApiClient.new({q: "coffee", api_key: "secure API key", engine: "google"})
+  # result = search.get_json
   # ```
   #
   # @param [Hash] params contains requested parameter
@@ -118,7 +117,7 @@ class SerpApiClient
     $serp_api_key = api_key
   end
 
-  # @return [String] api_key for this client
+  # @return [String] api_key for this search
   def api_key
     @params[:api_key] || @params[:serp_api_key] || $serp_api_key
   end

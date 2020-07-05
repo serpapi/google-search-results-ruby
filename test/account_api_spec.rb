@@ -7,10 +7,10 @@ describe "Account API" do
   end
   
   it 'example' do
-    client = GoogleSearchResults.new
+    search = GoogleSearchResults.new
 
     if ENV['API_KEY'].nil?
-      allow(client).to receive(:get_results) {
+      allow(search).to receive(:get_results) {
         %q({
           "account_id": "5ac54d6adefb2f1dba1663f5",
           "api_key": "SECRET_API_KEY",
@@ -23,7 +23,7 @@ describe "Account API" do
         })
       }
     end
-    account_info = client.get_account
+    account_info = search.get_account
 
     expect(account_info.keys.size).to be > 5
     expect(account_info[:account_id]).not_to be_empty

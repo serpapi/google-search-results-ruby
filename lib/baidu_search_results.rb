@@ -10,11 +10,11 @@ require_relative 'serp_api_client'
 #   api_key: "Serp API Key"
 # }
 #
-# client = BaiduSearchResults.new(parameter)
+# search = BaiduSearchResults.new(parameter)
 #
-# html_results = client.get_html
-# hash_results = client.get_hash
-# json_results = client.get_json
+# html_results = search.get_html
+# hash_results = search.get_hash
+# json_results = search.get_json
 #
 # ```
 # doc: https://serpapi.com/baidu-search-api

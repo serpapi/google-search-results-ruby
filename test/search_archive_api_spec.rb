@@ -15,22 +15,22 @@ describe "Search Archive API" do
       })
 
     # run a search
-    client = GoogleSearchResults.new(q: "Coffee", location: "Portland")
+    search = GoogleSearchResults.new(q: "Coffee", location: "Portland")
 
-    if client.api_key.nil?
-      allow(client).to receive(:get_results) { search_response_mock }
+    if search.api_key.nil?
+      allow(search).to receive(:get_results) { search_response_mock }
     end
-    original_search = client.get_hash
+    original_search = search.get_hash
 
     search_id = original_search[:search_metadata][:id]
     expect(search_id).not_to be_empty
 
     # retrieve search from archive
-    client = GoogleSearchResults.new({})
-    if client.api_key.nil?
-      allow(client).to receive(:get_results) { search_response_mock }
+    search = GoogleSearchResults.new({})
+    if search.api_key.nil?
+      allow(search).to receive(:get_results) { search_response_mock }
     end
-    archive_search = client.get_search_archive(search_id)
+    archive_search = search.get_search_archive(search_id)
   
     expect(archive_search).to eq(original_search)
   end

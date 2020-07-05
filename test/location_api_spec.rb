@@ -7,8 +7,8 @@ describe "Location API" do
   end
   
   it 'example' do
-    client = GoogleSearchResults.new(q: "Austin", limit: 3) 
-    location_list = client.get_location
+    search = GoogleSearchResults.new(q: "Austin", limit: 3) 
+    location_list = search.get_location
     expect(location_list.size).to eq(3)
 
     first = location_list.first
@@ -21,7 +21,7 @@ describe "Location API" do
     expect(first[:keys]).to eq(["austin", "tx", "texas", "united", "states"])
     expect(first[:canonical_name]).to eq("Austin,TX,Texas,United States")
 
-    if client.engine == 'google'
+    if search.engine == 'google'
       expect(first[:google_id]).to eq(200635)
       expect(first[:google_parent_id]).to eq(21176)
     end

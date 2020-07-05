@@ -10,12 +10,12 @@ require_relative 'serp_api_client'
 #   api_key: "Your SERP API Key"
 # }
 #
-# client = YandexSearchResults.new(parameter)
-# client.params[:yandex_domain] = "yandex.com"
+# search = YandexSearchResults.new(parameter)
+# search.params[:yandex_domain] = "yandex.com"
 #
-# html_results = client.get_html
-# hash_results = client.get_hash
-# json_results = client.get_json
+# html_results = search.get_html
+# hash_results = search.get_hash
+# json_results = search.get_json
 #
 # ```
 #

@@ -11,12 +11,12 @@ require_relative '../lib/bing_search_results'
 #   api_key: "Your SERP API Key"
 # }
 #
-# client = BingSearchResults.new(parameter)
-# client.params[:location] = "Portland"
+# search = BingSearchResults.new(parameter)
+# search.params[:location] = "Portland"
 #
-# html_results = client.get_html
-# hash_results = client.get_hash
-# json_results = client.get_json
+# html_results = search.get_html
+# hash_results = search.get_hash
+# json_results = search.get_json
 #
 # ```
 # 

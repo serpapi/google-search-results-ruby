@@ -10,12 +10,12 @@ require_relative 'serp_api_client'
 #   api_key: "Your SERP API Key"
 # }
 #
-# client = EbaySearchResults.new(parameter)
-# client.params[:ebay_domain] = "ebay.com"
+# search = EbaySearchResults.new(parameter)
+# search.params[:ebay_domain] = "ebay.com"
 #
-# html_results = client.get_html
-# hash_results = client.get_hash
-# json_results = client.get_json
+# html_results = search.get_html
+# hash_results = search.get_hash
+# json_results = search.get_json
 #
 # ```
 #

@@ -20,12 +20,12 @@ require_relative 'serp_api_client'
 #   api_key: "Your SERP API Key"
 # }
 #
-# client = GoogleSearchResults.new(parameter)
-# client.params[:location] = "Portland"
+# search = GoogleSearchResults.new(parameter)
+# search.params[:location] = "Portland"
 #
-# html_results = client.get_html
-# hash_results = client.get_hash
-# json_results = client.get_json
+# html_results = search.get_html
+# hash_results = search.get_hash
+# json_results = search.get_json
 # ```
 #
 # doc: https://serpapi.com/search-api
