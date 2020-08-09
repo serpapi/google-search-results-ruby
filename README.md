@@ -79,6 +79,7 @@ See the [playground to generate your code.](https://serpapi.com/playground)
     - [Ebay search API](#ebay-search-api)
     - [Generic SerpApi search](#generic-serpapi-search)
 - [Change log](#change-log)
+- [Roadmap](#roadmap)
 - [Conclusion](#conclusion)
 - [Contributing](#contributing)
 
@@ -413,12 +414,16 @@ pp hash[:organic_results]
 see: google-search-results-ruby/test/search_api_spec.rb
 
 # Change log
-1.3.2 - rename variable client to search for naming consistency
-1.3 - support for all major search engine
-1.2 - stable versino to support goole and few more search engine
-1.1 - client connection improvement to allow multi threading and fiber support
-1.0 - first stable version with Google engine search with Google image
+ * 2.0 - API simplified( GoogleSearchResults -> GoogleSearch), fix gem issue with 2.6+ Ruby, Out Of Box step to verify the package before delivery.
+ * 1.3.2 - rename variable client to search for naming consistency
+ * 1.3 - support for all major search engine
+ * 1.2 - stable versino to support goole and few more search engine
+ * 1.1 - client connection improvement to allow multi threading and fiber support
+ * 1.0 - first stable version with Google engine search with Google image
 
+# Roadmap
+ * 2.1 Improve exception / HTTP status handling
+  
 # Conclusion
 SerpApi supports all the major search engines. Google has the more advance support with all the major services available: Images, News, Shopping and more..
 To enable a type of search, the field tbm (to be matched) must be set to:
