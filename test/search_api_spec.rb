@@ -1,10 +1,10 @@
-require_relative '../lib/google_search_results'
+require_relative '../lib/search/google_search'
 
 describe "Google Search API Google" do
 
   before(:all) do
-    SerpApiClient.api_key = ENV['API_KEY']
-    @search = SerpApiClient.new({q: "Coffee", location: "Portland",  engine: "google"})
+    SerpApiSearch.api_key = ENV['API_KEY']
+    @search = SerpApiSearch.new({q: "Coffee", location: "Portland",  engine: "google"})
   end
 
   it 'get_hash' do
@@ -27,13 +27,13 @@ end
 describe 'low level' do
 
   it 'construct_url' do
-    SerpApiClient.api_key = nil
-    search = SerpApiClient.new({q: "Coffee", location: "Portland", serp_api_key: nil}, 'google')
+    SerpApiSearch.api_key = nil
+    search = SerpApiSearch.new({q: "Coffee", location: "Portland", serp_api_key: nil}, 'google')
     expect(search.construct_url('/search').to_s).to eq("https://serpapi.com/search?q=Coffee&location=Portland&engine=google&source=ruby")
   end
 
   it 'construct_url' do
-    search = SerpApiClient.new({q: "Coffee", location: "Portland", serp_api_key: 'hello_world'}, 'google')
+    search = SerpApiSearch.new({q: "Coffee", location: "Portland", serp_api_key: 'hello_world'}, 'google')
     expect(search.construct_url('/search').to_s).to eq("https://serpapi.com/search?q=Coffee&location=Portland&serp_api_key=hello_world&engine=google&source=ruby")
   end
 

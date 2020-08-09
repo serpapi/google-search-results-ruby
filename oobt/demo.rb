@@ -11,7 +11,7 @@ params = {
   api_key: ENV['API_KEY']
 }
 
-client = GoogleSearchResults.new(params)
+client = GoogleSearch.new(params)
 suggestions = client.get_hash[:suggestions]
 
 pp suggestions

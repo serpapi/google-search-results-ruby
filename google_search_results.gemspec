@@ -1,20 +1,21 @@
-require './lib/google_search_results'
+require_relative 'lib/search/serp_api_search'
 
 Gem::Specification.new do |s|
   s.name        = "google_search_results"
-  s.version     = SerpApiClient::VERSION
+  s.version     = SerpApiSearch::VERSION
   s.summary     = "Get Google, Bing, Baidu, Ebay, Yahoo, Yandex Search Results via SerpApi.com"
   s.description = "Scape localized search results from search engine using SerpApi.com and returns Hash, JSON, raw HTML"
   s.authors     = ["hartator", "jvmvik"]
   s.email       = "hartator@gmail.com"
   s.files       = [
-     "lib/serp_api_client.rb",
      "lib/google_search_results.rb",
-     "lib/bing_search_results.rb",
-     "lib/baidu_search_results.rb",
-     "lib/yahoo_search_results.rb",
-     "lib/yandex_search_results.rb",
-     "lib/ebay_search_results.rb",
+     "lib/search/serp_api_search.rb",
+     "lib/search/google_search.rb",
+     "lib/search/bing_search.rb",
+     "lib/search/baidu_search.rb",
+     "lib/search/yahoo_search.rb",
+     "lib/search/yandex_search.rb",
+     "lib/search/ebay_search.rb",
     ]
   s.homepage    = "https://github.com/serpapi/google-search-results-ruby"
   s.license     = "MIT"

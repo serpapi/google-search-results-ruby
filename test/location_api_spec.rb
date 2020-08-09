@@ -1,13 +1,13 @@
-require_relative '../lib/google_search_results'
+require_relative '../lib/search/google_search'
 
 describe "Location API" do
 
   before(:all) do
-    GoogleSearchResults.api_key = nil
+    GoogleSearch.api_key = nil
   end
   
   it 'example' do
-    search = GoogleSearchResults.new(q: "Austin", limit: 3) 
+    search = GoogleSearch.new(q: "Austin", limit: 3) 
     location_list = search.get_location
     expect(location_list.size).to eq(3)
 

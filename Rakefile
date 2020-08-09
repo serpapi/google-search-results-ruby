@@ -4,7 +4,7 @@ require 'rubocop/rake_task'
 require 'yard'
 
 YARD::Rake::YardocTask.new(:doc) do |t|
- t.files   = ['lib/*.rb']
+ t.files   = ['lib/search/*.rb']
  t.options = ['--markup=markdown']
  t.stats_options = ['--list-undoc']
 end

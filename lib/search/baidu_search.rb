@@ -1,4 +1,4 @@
-require_relative 'serp_api_client'
+require_relative 'serp_api_search'
 
 # Baidu Search Result for Ruby powered by SerpApi
 #
@@ -10,7 +10,7 @@ require_relative 'serp_api_client'
 #   api_key: "Serp API Key"
 # }
 #
-# search = BaiduSearchResults.new(parameter)
+# search = BaiduSearch.new(parameter)
 #
 # html_results = search.get_html
 # hash_results = search.get_hash
@@ -19,7 +19,7 @@ require_relative 'serp_api_client'
 # ```
 # doc: https://serpapi.com/baidu-search-api
 
-class BaiduSearchResults < SerpApiClient
+class BaiduSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, BING_ENGINE)

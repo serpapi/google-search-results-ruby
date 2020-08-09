@@ -1,7 +1,7 @@
 # Google Search Results in Ruby
 
-![test](https://github.com/serpapi/google-search-results-ruby/workflows/test/badge.svg)
-[![Gem Version](https://badge.fury.io/rb/google_search_results.svg)](https://rubygems.org/gems/google_search_results/)
+[![Gem Version](https://badge.fury.io/rb/google_search.svg)](https://rubygems.org/gems/google_search/)
+[![Build Status](https://travis-ci.org/serpapi/google-search-results-ruby.svg?branch=master)](https://travis-ci.org/serpapi/google-search-results-ruby)
 
 This Ruby Gem is meant to scrape and parse results from Google, Bing, Baidu, Yandex, Yahoo, Ebay and more using [SerpApi](https://serpapi.com).
 
@@ -19,16 +19,16 @@ SerpApi.com provides a [script builder](https://serpapi.com/demo) to get you sta
 Ruby 2.5+ must be already installed:
 
 ```bash
-$ gem install google_search_results
+$ gem install google_search
 ```
 
-[Link to the gem page](https://rubygems.org/gems/google_search_results/)
+[Link to the gem page](https://rubygems.org/gems/google_search/)
 
 ## Quick start
 
 ```ruby
-require 'google_search_results'
-search = GoogleSearchResults.new(q: "coffee", serp_api_key: "secret_api_key")
+require 'google_search'
+search = GoogleSearch.new(q: "coffee", serp_api_key: "secret_api_key")
 hash_results = search.get_hash
  ```
 
@@ -38,18 +38,18 @@ The SerpApi.com service (backend)
  - searches on Google using the search: q = "coffee"
  - parses the messy HTML responses
  - return a standardizes JSON response
-The class GoogleSearchResults
+The class GoogleSearch
  - Format the request to SerpApi.com server
  - Execute GET http request
  - Parse JSON into Ruby Hash using JSON standard library provided by Ruby
 Et voila..
 
 Alternatively, you can search:
- - Bing using BingSearchResults class
- - Baidu using BaiduSearchResults class
- - Yahoo using YahooSearchResults class
- - Yandex using YandexSearchResults class
- - Ebay using EbaySearchResults class
+ - Bing using BingSearch class
+ - Baidu using BaiduSearch class
+ - Yahoo using YahooSearch class
+ - Yandex using YandexSearch class
+ - Ebay using EbaySearch class
 
 See the [playground to generate your code.](https://serpapi.com/playground)
 
@@ -86,13 +86,13 @@ See the [playground to generate your code.](https://serpapi.com/playground)
 ### How to set the private API key
 The api_key can be set globally using a singleton pattern.
 ```ruby
-GoogleSearchResults.api_key = "secret_api_key"
-search = GoogleSearchResults.new(q: "coffee")
+GoogleSearch.api_key = "secret_api_key"
+search = GoogleSearch.new(q: "coffee")
 ```
 
 or api_key can be provided for each search.
 ```ruby
-search = GoogleSearchResults.new(q: "coffee", api_key: "secret_api_key")
+search = GoogleSearch.new(q: "coffee", api_key: "secret_api_key")
 ```
 
 To get the key simply copy/paste from [serpapi.com/dashboard](https://serpapi.com/dashboard).
@@ -116,7 +116,7 @@ search_params = {
 }
 
 # define the search search
-search = GoogleSearchResults.new(search_params)
+search = GoogleSearch.new(search_params)
 
 # override an existing parameter
 search.params[:location] = "Portland,Oregon,United States"
@@ -166,7 +166,7 @@ rake test
 ### Location API
 
 ```ruby
-location_list = GoogleSearchResults.new(q: "Austin", limit: 3).get_location
+location_list = GoogleSearch.new(q: "Austin", limit: 3).get_location
 pp location_list
 ```
 
@@ -189,7 +189,7 @@ it prints the first 3 location matching Austin (Texas, Texas, Rochester)
 This API allows to retrieve previous search.
 To do so run a search to save a search_id.
 ```ruby
-search = GoogleSearchResults.new(q: "Coffee", location: "Portland")
+search = GoogleSearch.new(q: "Coffee", location: "Portland")
 original_search = search.get_hash
 search_id = original_search[:search_metadata][:id]
 ```
@@ -197,7 +197,7 @@ search_id = original_search[:search_metadata][:id]
 Now let retrieve the previous search from the archive.
 
 ```ruby
-search = GoogleSearchResults.new
+search = GoogleSearch.new
 archive_search = search.get_search_archive(search_id)
 pp archive_search
 ```
@@ -205,7 +205,7 @@ it prints the search from the archive.
 
 ### Account API
 ```ruby
-search = GoogleSearchResults.new
+search = GoogleSearch.new
 pp search.get_account
 ```
 it prints your account information.
@@ -213,7 +213,7 @@ it prints your account information.
 ### Search Google Images
 
 ```ruby
-search = GoogleSearchResults.new(q: 'cofffe', tbm: "isch")
+search = GoogleSearch.new(q: 'cofffe', tbm: "isch")
 image_results_list = search.get_hash[:images_results]
 image_results_list.each do |image_result|
   puts image_result[:original]
@@ -227,7 +227,7 @@ this code prints all the images links,
 ### Search Google News
 
 ```ruby
-search = GoogleSearchResults.new({
+search = GoogleSearch.new({
   q: 'cofffe', # search search
   tbm: "nws", # news
   tbs: "qdr:d", # last 24h
@@ -248,7 +248,7 @@ this script prints the first 3 pages of the news title for the last 24h.
 ### Search Google Shopping
 
 ```ruby
-search = GoogleSearchResults.new({
+search = GoogleSearch.new({
   q: 'cofffe', # search search
   tbm: "shop", # shopping
   tbs: "tbs=p_ord:rv" # by best review
@@ -269,10 +269,10 @@ This code is looking for the best coffee shop per city.
 ```ruby
 ["new york", "paris", "berlin"].each do |city|
     # get location from the city name
-    location = GoogleSearchResults.new({q: city, limit: 1}).get_location.first[:canonical_name]
+    location = GoogleSearch.new({q: city, limit: 1}).get_location.first[:canonical_name]
 
     # get top result
-    search = GoogleSearchResults.new({
+    search = GoogleSearch.new({
       q: 'best coffee shop', 
       location: location,
       num: 1,  # number of result
@@ -294,7 +294,7 @@ We do offer two ways to boost your searches thanks to `async` parameter.
 company_list = %w(microsoft apple nvidia)
 
 puts "submit batch of asynchronous searches"
-search = GoogleSearchResults.new({async: true})
+search = GoogleSearch.new({async: true})
 
 search_queue = Queue.new
 company_list.each do |company|
@@ -313,7 +313,7 @@ company_list.each do |company|
 end
 
 puts "wait until all searches are cached or success"
-search = GoogleSearchResults.new
+search = GoogleSearch.new
 while !search_queue.empty?
   result = search_queue.pop
   # extract search id
@@ -340,8 +340,8 @@ This code shows a simple implementation to run a batch of asynchronously searche
 ### Google search API
 
 ```ruby
-GoogleSearchResults.api_key = ""
-search = GoogleSearchResults.new(q: "Coffee", location: "Portland")
+GoogleSearch.api_key = ""
+search = GoogleSearch.new(q: "Coffee", location: "Portland")
 pp search.get_hash
 ```
 
@@ -350,8 +350,8 @@ https://serpapi.com/search-api
 ### Bing search API
 
 ```ruby
-BingSearchResults.api_key = ""
-search = BingSearchResults.new(q: "Coffee", location: "Portland")
+BingSearch.api_key = ""
+search = BingSearch.new(q: "Coffee", location: "Portland")
 pp search.get_hash
 ```
 
@@ -360,8 +360,8 @@ https://serpapi.com/bing-search-api
 ### Baidu search API
 
 ```ruby
-BaiduSearchResults.api_key = ""
-search = BaiduSearchResults.new(q: "Coffee")
+BaiduSearch.api_key = ""
+search = BaiduSearch.new(q: "Coffee")
 pp search.get_hash
 ```
 
@@ -370,8 +370,8 @@ https://serpapi.com/baidu-search-api
 ### Yahoo search API
 
 ```ruby
-YahooSearchResults.api_key = ""
-search = YahooSearchResults.new(p: "Coffee")
+YahooSearch.api_key = ""
+search = YahooSearch.new(p: "Coffee")
 pp search.get_hash
 ```
 
@@ -380,8 +380,8 @@ https://serpapi.com/yahoo-search-api
 ### Yandex search API
 
 ```ruby
-YandexSearchResults.api_key = ""
-search = YandexSearchResults.new(text: "Coffee")
+YandexSearch.api_key = ""
+search = YandexSearch.new(text: "Coffee")
 pp search.get_hash
 ```
 
@@ -390,8 +390,8 @@ https://serpapi.com/yandex-search-api
 ### Ebay search API
 
 ```ruby
-EbaySearchResults.api_key = ""
-search = EbaySearchResults.new(_nkw: "Coffee")
+EbaySearch.api_key = ""
+search = EbaySearch.new(_nkw: "Coffee")
 pp search.get_hash
 ```
 
@@ -400,12 +400,12 @@ https://serpapi.com/ebay-search-api
 ### Generic SerpApi search
 
 ```ruby
-SerpApiClient.api_key = ENV['API_KEY']
+SerpApiSearch.api_key = ENV['API_KEY']
 query = {
   p: "Coffee", 
   engine: "youtube"
 }
-search = SerpApiClient.new(query)
+search = SerpApiSearch.new(query)
 hash = search.get_hash
 pp hash[:organic_results]
 ```

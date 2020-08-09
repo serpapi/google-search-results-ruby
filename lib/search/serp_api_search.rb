@@ -11,9 +11,9 @@ EBAY_ENGINE = 'ebay'
 
 # Generic HTTP client for serpapi.com
 #
-class SerpApiClient
+class SerpApiSearch
 
-  VERSION = "1.3.2"
+  VERSION = "2.0.0"
   BACKEND = "serpapi.com"
 
   attr_accessor :params
@@ -24,8 +24,8 @@ class SerpApiClient
   # ---
   #
   # ```ruby
-  # require 'google_search_results'
-  # search = SerpApiClient.new({q: "coffee", api_key: "secure API key", engine: "google"})
+  # require 'google_search'
+  # search = SerpApiSearch.new({q: "coffee", api_key: "secure API key", engine: "google"})
   # result = search.get_json
   # ```
   #

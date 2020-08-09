@@ -1,4 +1,4 @@
-require_relative 'serp_api_client'
+require_relative 'serp_api_search'
 
 # Yandex Search Result for Ruby powered by SerpApi
 #
@@ -10,7 +10,7 @@ require_relative 'serp_api_client'
 #   api_key: "Your SERP API Key"
 # }
 #
-# search = YandexSearchResults.new(parameter)
+# search = YandexSearch.new(parameter)
 # search.params[:yandex_domain] = "yandex.com"
 #
 # html_results = search.get_html
@@ -21,7 +21,7 @@ require_relative 'serp_api_client'
 #
 # doc: https://serpapi.com/yandex-search-api
 
-class YandexSearchResults < SerpApiClient
+class YandexSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, YANDEX_ENGINE)

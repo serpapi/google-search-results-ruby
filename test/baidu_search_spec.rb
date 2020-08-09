@@ -1,10 +1,10 @@
-require_relative '../lib/baidu_search_results'
+require_relative '../lib/search/baidu_search'
 
 describe "Baidu Search API Google" do
 
   before(:all) do
-    BaiduSearchResults.api_key = ENV['API_KEY']
-    @search = BaiduSearchResults.new(q: "Coffee")
+    BaiduSearch.api_key = ENV['API_KEY']
+    @search = BaiduSearch.new(q: "Coffee")
   end
 
   it 'get_hash' do

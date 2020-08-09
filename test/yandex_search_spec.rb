@@ -1,10 +1,10 @@
-require_relative '../lib/bing_search_results'
+require_relative '../lib/search/yandex_search'
 
-describe "Bing Search API" do
+describe "Yandex Search API" do
 
   before(:all) do
-    BingSearchResults.api_key = ENV['API_KEY']
-    @search = BingSearchResults.new(q: "Coffee", location: "Portland")
+    YandexSearch.api_key = ENV['API_KEY']
+    @search = YandexSearch.new(text: "Coffee")
   end
 
   it 'get_hash' do

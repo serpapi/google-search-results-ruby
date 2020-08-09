@@ -1,4 +1,4 @@
-require_relative '../lib/bing_search_results'
+require_relative 'serp_api_search'
 
 # Bing Search Result for Ruby powered by SerpApi
 #
@@ -11,7 +11,7 @@ require_relative '../lib/bing_search_results'
 #   api_key: "Your SERP API Key"
 # }
 #
-# search = BingSearchResults.new(parameter)
+# search = BingSearch.new(parameter)
 # search.params[:location] = "Portland"
 #
 # html_results = search.get_html
@@ -22,7 +22,7 @@ require_relative '../lib/bing_search_results'
 # 
 # doc: https://serpapi.com/bing-search-api
 
-class BingSearchResults < SerpApiClient
+class BingSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, BING_ENGINE)

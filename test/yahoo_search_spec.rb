@@ -1,10 +1,10 @@
-require_relative '../lib/ebay_search_results'
+require_relative '../lib/search/yahoo_search'
 
-describe "Ebay Search API" do
+describe "Yahoo Search API" do
 
   before(:all) do
-    EbaySearchResults.api_key = ENV['API_KEY']
-    @search = EbaySearchResults.new(_nkw: "Coffee")
+    YahooSearch.api_key = ENV['API_KEY']
+    @search = YahooSearch.new(p: "Coffee")
   end
 
   it 'get_hash' do

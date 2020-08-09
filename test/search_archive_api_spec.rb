@@ -1,9 +1,9 @@
-require_relative '../lib/google_search_results'
+require_relative '../lib/search/google_search'
 
 describe "Search Archive API" do
 
   before(:all) do
-    GoogleSearchResults.api_key = ENV['API_KEY']
+    GoogleSearch.api_key = ENV['API_KEY']
   end
   
   it 'example' do
@@ -15,7 +15,7 @@ describe "Search Archive API" do
       })
 
     # run a search
-    search = GoogleSearchResults.new(q: "Coffee", location: "Portland")
+    search = GoogleSearch.new(q: "Coffee", location: "Portland")
 
     if search.api_key.nil?
       allow(search).to receive(:get_results) { search_response_mock }
@@ -26,7 +26,7 @@ describe "Search Archive API" do
     expect(search_id).not_to be_empty
 
     # retrieve search from archive
-    search = GoogleSearchResults.new({})
+    search = GoogleSearch.new({})
     if search.api_key.nil?
       allow(search).to receive(:get_results) { search_response_mock }
     end

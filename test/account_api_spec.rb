@@ -1,13 +1,13 @@
-require_relative '../lib/google_search_results'
+require_relative '../lib/search/google_search'
 
 describe "Account API" do
 
   before(:all) do
-    GoogleSearchResults.api_key = ENV['API_KEY']
+    GoogleSearch.api_key = ENV['API_KEY']
   end
   
   it 'example' do
-    search = GoogleSearchResults.new
+    search = GoogleSearch.new
 
     if ENV['API_KEY'].nil?
       allow(search).to receive(:get_results) {

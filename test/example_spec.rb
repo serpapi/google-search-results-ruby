@@ -1,13 +1,13 @@
-require_relative '../lib/google_search_results'
+require_relative '../lib/search/google_search'
 
 if ENV['API_KEY'] && GOOGLE_ENGINE == 'google'
   
-GoogleSearchResults.api_key = ENV['API_KEY']
+GoogleSearch.api_key = ENV['API_KEY']
 
 describe 'Search Google Images' do
 
   it 'this script prints all the images links and download.' do
-    search = GoogleSearchResults.new(q: 'coffee', tbm: "isch")
+    search = GoogleSearch.new(q: 'coffee', tbm: "isch")
     image_results_list = search.get_hash[:images_results]
     image_results_list.each_with_index do |image_result, index|
       next if image_result.nil?
@@ -22,7 +22,7 @@ end
 describe 'Search Google shop' do
 
   it 'this script prints the first 3 pages of the news title for the last 24h' do
-    search = GoogleSearchResults.new({
+    search = GoogleSearch.new({
       q: 'coffee', # search query
       tbm: "nws", # news
       tbs: "qdr:d", # last 24h
@@ -43,7 +43,7 @@ end
 describe 'Search Google Shopping' do
 
   it 'this script prints all the shopping results order by review order with position' do
-    search = GoogleSearchResults.new({
+    search = GoogleSearch.new({
       q: 'coffee', # search query
       tbm: "shop", # shopping
       tbs: "tbs=p_ord:rv" # by best review
@@ -61,10 +61,10 @@ describe 'Search Google By Location' do
   it 'this search shows the top coffee result per location.' do
     ["new york", "paris", "berlin"].each do |city|
       # get location from the city name
-      location = GoogleSearchResults.new({q: city, limit: 1}).get_location.first[:canonical_name]
+      location = GoogleSearch.new({q: city, limit: 1}).get_location.first[:canonical_name]
 
       # get top result
-      search = GoogleSearchResults.new({
+      search = GoogleSearch.new({
         q: 'best coffee shop', 
         location: location,
         num: 1,  # number of result
@@ -88,7 +88,7 @@ describe 'Batch Asynchronous search' do
     company_list = %w(microsoft apple nvidia)
   
     puts "submit batch asynchronous search"
-    search = GoogleSearchResults.new({async: true, q: company_list.first })
+    search = GoogleSearch.new({async: true, q: company_list.first })
 
     search_queue = Queue.new
     company_list.each do |company|
@@ -107,7 +107,7 @@ describe 'Batch Asynchronous search' do
     end
 
     puts 'wait until all searches are cached or success'
-    search = GoogleSearchResults.new
+    search = GoogleSearch.new
     until search_queue.empty?
       search_result = search_queue.pop
       # extract search id

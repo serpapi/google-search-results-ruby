@@ -1,4 +1,4 @@
-require_relative 'serp_api_client'
+require_relative 'serp_api_search'
 
 # Ebay Search Result for Ruby powered by SerpApi
 #
@@ -10,7 +10,7 @@ require_relative 'serp_api_client'
 #   api_key: "Your SERP API Key"
 # }
 #
-# search = EbaySearchResults.new(parameter)
+# search = EbaySearch.new(parameter)
 # search.params[:ebay_domain] = "ebay.com"
 #
 # html_results = search.get_html
@@ -21,7 +21,7 @@ require_relative 'serp_api_client'
 #
 # doc: https://serpapi.com/ebay-search-api
 
-class EbaySearchResults < SerpApiClient
+class EbaySearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, EBAY_ENGINE)

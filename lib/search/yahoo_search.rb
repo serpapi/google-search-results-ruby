@@ -1,4 +1,4 @@
-require_relative 'serp_api_client'
+require_relative 'serp_api_search'
 
 # Yahoo Search Result for Ruby powered by SerpApi
 #
@@ -10,7 +10,7 @@ require_relative 'serp_api_client'
 #   api_key: "Your SERP API Key"
 # }
 #
-# search = YahooSearchResults.new(parameter)
+# search = YahooSearch.new(parameter)
 # search.params[:yahoo_domain] = "fr"
 #
 # html_results = search.get_html
@@ -21,7 +21,7 @@ require_relative 'serp_api_client'
 #
 # doc: https://serpapi.com/yahoo-search-api
 
-class YahooSearchResults < SerpApiClient
+class YahooSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, YAHOO_ENGINE)
