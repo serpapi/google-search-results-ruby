@@ -13,7 +13,7 @@ dep:
 	bundle install
 
 build:
-	gem build
+	gem build google_search_results
 
 # run oobt out box test on the package created locally
 oobt: build
