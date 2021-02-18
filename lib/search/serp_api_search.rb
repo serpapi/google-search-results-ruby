@@ -131,7 +131,7 @@ class SerpApiSearch
   def get_results(path)
     begin
       url = construct_url(path)
-      URI::open(url, read_timeout: 600).read
+      URI(url).open(read_timeout: 600).read
     rescue OpenURI::HTTPError => e
       if error = JSON.load(e.io.read)["error"]
         puts "server returns error for url: #{url}"
