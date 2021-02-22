@@ -18,7 +18,7 @@ describe "Yandex Search API" do
 
   it 'get_json' do
     json = @search.get_json
-    expect(json.size).to be > 9000
+    expect(json.size).to be > 5000
     expect(json).to match /coffee/i
   end
 
