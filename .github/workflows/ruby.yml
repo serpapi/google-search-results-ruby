@@ -2,29 +2,32 @@ name: serpapi-search-ruby
 
 on:
   push:
-    branches: [ master ]
+    branches: [ $default-branch ]
   pull_request:
-    branches: [ master ]
+    branches: [ $default-branch ]
 
 jobs:
-  build:
-    runs-on: ubuntu-16.04
+  test:
+
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        ruby: [ '1.9', '2.2', '2.5', '2.6', '2.7', '3.0' ]
-    name: Ruby ${{ matrix.ruby }} sample
+        ruby-version: [3.0.0, 2.7.x, 2.5.x, 2.2]
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-      - name: install dependency
-        run: bundle install
-      - name: Run tests
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-        run: bundle exec rake
-      - name: oobt
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-        run: make oobt
+    - uses: actions/checkout@v2
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+    - name: Install dependencies
+      run: bundle install
+    - name: Run tests
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
+      run: bundle exec rake
+    - name: oobt
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
+      run: make oobt
