@@ -124,7 +124,8 @@ describe 'Batch Asynchronous search' do
       search_queue.push(search_result)
     end
 
-    search_queue.close
+    #work only with Ruby >2.5
+    #search_queue.close
     puts 'all searches completed'
   end
 
