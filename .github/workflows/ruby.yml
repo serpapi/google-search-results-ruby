@@ -1,4 +1,4 @@
-name: test 
+name: serpapi-search-ruby 
 
 on:
   push:
@@ -11,19 +11,20 @@ jobs:
     runs-on: ubuntu-16.04
     strategy:
       matrix:
-        ruby: [ '2.2', '2.5', '2.6', '3.0' ]
+        ruby: [ '1.9', '2.2', '2.5', '2.6', '2.7', '3.0' ]
     name: Ruby ${{ matrix.ruby }} sample
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
-    - name: Install dependencies
-      run: bundle install
-    - name: Run tests
-      env:
-        API_KEY: ${{ secrets.API_KEY }}
-      run: bundle exec rake
-    - name: oobt
-      env:
-        API_KEY: ${{ secrets.API_KEY }}
-      run: make oobt
-      
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: install dependency
+        run: bundle install
+      - name: Run tests
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: bundle exec rake
+      - name: oobt
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: make oobt
