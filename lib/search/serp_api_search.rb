@@ -13,7 +13,7 @@ EBAY_ENGINE = 'ebay'
 #
 class SerpApiSearch
 
-  VERSION = "2.0.0"
+  VERSION = "2.0.1"
   BACKEND = "serpapi.com"
 
   attr_accessor :params
