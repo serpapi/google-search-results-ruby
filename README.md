@@ -109,8 +109,8 @@ To get the key simply copy/paste from [serpapi.com/dashboard](https://serpapi.co
 ```ruby
 search_params = {
   q: "search",
-  google_domain: "Google Domain", 
-  location: "Location Requested", 
+  google_domain: "Google Domain",
+  location: "Location Requested",
   device: "desktop|mobile|tablet",
   hl: "Google UI Language",
   gl: "Google Country",
@@ -146,9 +146,9 @@ More search API are documented on [SerpApi.com](http://serpapi.com).
 You will find more hands on examples below.
 
 ### Example by specification
-We love true open source, continuous integration and Test Drive Development (TDD). 
+We love true open source, continuous integration and Test Drive Development (TDD).
  We are using RSpec to test [our infrastructure around the clock](https://travis-ci.org/serpapi/google-search-results-ruby) to achieve the best QoS (Quality Of Service).
- 
+
 The directory test/ includes specification/examples.
 
 Set your api key.
@@ -229,7 +229,7 @@ end
 ```
 To download the image: `wget #{image_result[:original]}`
 
-this code prints all the images links, 
+this code prints all the images links,
  and download image if you un-comment the line with wget (linux/osx tool to download image).
 
 ### Search Google News
@@ -281,7 +281,7 @@ This code is looking for the best coffee shop per city.
 
     # get top result
     search = GoogleSearch.new({
-      q: 'best coffee shop', 
+      q: 'best coffee shop',
       location: location,
       num: 1,  # number of result
       start: 0 # offset
@@ -334,8 +334,8 @@ while !search_queue.empty?
     next
   end
 
-  # add back the search
-  search_queue.push(search)
+  # add result to the search queue
+  search_queue.push(result)
 end
 
 search_queue.close
@@ -410,7 +410,7 @@ https://serpapi.com/ebay-search-api
 ```ruby
 SerpApiSearch.api_key = ENV['API_KEY']
 query = {
-  p: "Coffee", 
+  p: "Coffee",
   engine: "youtube"
 }
 search = SerpApiSearch.new(query)
@@ -430,7 +430,7 @@ see: google-search-results-ruby/test/search_api_spec.rb
 
 # Roadmap
  * 2.1 Improve exception / HTTP status handling
-  
+
 # Conclusion
 SerpApi supports all the major search engines. Google has the more advance support with all the major services available: Images, News, Shopping and more..
 To enable a type of search, the field tbm (to be matched) must be set to:
