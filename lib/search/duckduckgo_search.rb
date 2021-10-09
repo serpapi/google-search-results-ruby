@@ -1,33 +1,29 @@
 require_relative 'serp_api_search'
 
-# Baidu Search Result for Ruby powered by SerpApi
+# Duckduckgo Search Result for Ruby powered by SerpApi
 #
 # Search API Usage
 #
 # ```ruby
 # parameter = {
-#   q: "query",
+#   search_query: "query",
 #   api_key: "Serp API Key"
 # }
 #
-# search = BaiduSearch.new(parameter)
+# search = DuckduckgoSearch.new(parameter)
 #
 # html_results = search.get_html
 # hash_results = search.get_hash
 # json_results = search.get_json
 #
 # ```
-# doc: https://serpapi.com/baidu-search-api
+# doc: https://serpapi.com/Duckduckgo-search-api
 
-class BaiduSearch < SerpApiSearch
+class DuckduckgoSearch < SerpApiSearch
 
   def initialize(params = {})
-    super(params, BAIDU_ENGINE)
+    super(params, DUCKDUCKGO_ENGINE)
     check_params([:q, :engine])
-  end
-
-  def get_location
-    raise 'location is not supported by Baidu'
   end
 
 end

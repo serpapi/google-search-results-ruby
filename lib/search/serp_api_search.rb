@@ -7,13 +7,16 @@ BING_ENGINE = 'bing'
 YAHOO_ENGINE = 'yahoo'
 YANDEX_ENGINE = 'yandex'
 EBAY_ENGINE = 'ebay'
-
+YOUTUBE_ENGINE = 'youtube'
+DUCKDUCKGO_ENGINE = 'duckduckgo'
+WALMART_ENGINE = 'walmart'
+HOMEDEPOT_ENGINE = 'home_depot'
 
 # Generic HTTP client for serpapi.com
 #
 class SerpApiSearch
 
-  VERSION = "2.0.1"
+  VERSION = "2.1.0"
   BACKEND = "serpapi.com"
 
   attr_accessor :params

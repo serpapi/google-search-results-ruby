@@ -1,19 +1,20 @@
-require_relative '../lib/search/baidu_search'
+require_relative '../lib/google_search_results'
 
-describe "Baidu Search API Google" do
+describe "Duckduckgo Search API Google" do
 
   before(:all) do
-    BaiduSearch.api_key = ENV['API_KEY']
-    @search = BaiduSearch.new(q: "Coffee")
+    DuckduckgoSearch.api_key = ENV['API_KEY']
+    @search = DuckduckgoSearch.new(q: "Coffee")
   end
 
   it 'get_hash' do
     hash = @search.get_hash
     expect(hash[:search_metadata][:status]).to eq('Success')
-    #expect(hash[:search_metadata][:baidu_url]).to match(/www.baidu.com/)
+    expect(hash[:search_metadata][:duckduckgo_url]).to match(/duckduckgo/)
     expect(hash[:organic_results].size).to be >= 4
     expect(hash[:organic_results].to_s).to match /coffee/i
-    # expect(hash[:pagination]).not_to be_empty
+    # not supported
+    expect(hash[:pagination]).to be_nil
   end
 
   it 'get_json' do

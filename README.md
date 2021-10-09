@@ -405,6 +405,46 @@ pp search.get_hash
 
 https://serpapi.com/ebay-search-api
 
+### Youtube search API
+
+```ruby
+YoutubeySearch.api_key = ""
+search = YoutubeSearch.new(search_query: "Coffee")
+pp search.get_hash
+```
+
+https://serpapi.com/youtube-search-api
+
+### Homedepot search API
+
+```ruby
+HomedepotSearch.api_key = ""
+search = HomedepotSearch.new(q: "Coffee")
+pp search.get_hash
+```
+
+https://serpapi.com/homedepot-search-api
+
+### Walmart search API
+
+```ruby
+WalmartSearch.api_key = ""
+search = WalmartSearch.new(query: "Coffee")
+pp search.get_hash
+```
+
+https://serpapi.com/walmart-search-api
+
+### Duckduckgo search API
+
+```ruby
+DuckduckgoSearch.api_key = ""
+search = DuckduckgoSearch.new(query: "Coffee")
+pp search.get_hash
+```
+
+https://serpapi.com/duckduckgo-search-api
+
 ### Generic SerpApi search
 
 ```ruby
@@ -421,6 +461,7 @@ pp hash[:organic_results]
 see: google-search-results-ruby/test/search_api_spec.rb
 
 # Change log
+ * 2.1 - Add more search engine: Youtube, Duckduckgo, Homedepot, Walmart
  * 2.0 - API simplified( GoogleSearchResults -> GoogleSearch), fix gem issue with 2.6+ Ruby, Out Of Box step to verify the package before delivery.
  * 1.3.2 - rename variable client to search for naming consistency
  * 1.3 - support for all major search engine
