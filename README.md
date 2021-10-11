@@ -57,10 +57,12 @@ Alternatively, you can search:
  - Yahoo using YahooSearch class
  - Yandex using YandexSearch class
  - Ebay using EbaySearch class
+ - Home depot using HomeDepotSearch class
+ - Youtube using YoutubeSearch class
 
 See the [playground to generate your code.](https://serpapi.com/playground)
 
-# Summary
+### Summary
 - [Google Search Results in Ruby](#google-search-results-in-ruby)
   - [Installation](#installation)
   - [Quick start](#quick-start)
@@ -85,6 +87,7 @@ See the [playground to generate your code.](https://serpapi.com/playground)
     - [Yandex search API](#yandex-search-api)
     - [Ebay search API](#ebay-search-api)
     - [Generic SerpApi search](#generic-serpapi-search)
+- [Error management](#error-management)
 - [Change log](#change-log)
 - [Roadmap](#roadmap)
 - [Conclusion](#conclusion)
@@ -460,8 +463,18 @@ pp hash[:organic_results]
 
 see: google-search-results-ruby/test/search_api_spec.rb
 
+
+### Error management
+
+This library follows the regular raise an exception when something goes wrong provided by Ruby.
+ Any networking related exception will be returned as is. 
+  Anything related to the client layer will be returned as a SerpApiException.
+   A SerpApiException might be caused by a bug in the library.
+   A networking problem will be caused by either SerpApi.com or your internet.
+
 # Change log
  * 2.1 - Add more search engine: Youtube, Duckduckgo, Homedepot, Walmart
+      - improve error management and documentation.
  * 2.0 - API simplified( GoogleSearchResults -> GoogleSearch), fix gem issue with 2.6+ Ruby, Out Of Box step to verify the package before delivery.
  * 1.3.2 - rename variable client to search for naming consistency
  * 1.3 - support for all major search engine

@@ -29,7 +29,7 @@ class YandexSearch < SerpApiSearch
   end
 
   def get_location
-    raise 'location is not supported by ' + YAHOO_ENGINE
+    raise SerpApiException.new('location is not supported by ' + YAHOO_ENGINE)
   end
 
 end

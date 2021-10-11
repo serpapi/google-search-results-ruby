@@ -37,7 +37,7 @@ class SerpApiSearch
   def initialize(params, engine = nil)
     @params = params
     @params[:engine] ||= engine
-    raise 'engine must be defined in params or a second argument' if @params[:engine].nil?
+    raise SerpApiException.new('engine must be defined in params or a second argument') if @params[:engine].nil?
   end
 
   # get_json 
@@ -81,7 +81,7 @@ class SerpApiSearch
 
   # Retrieve search result from the Search Archive API
   def get_search_archive(search_id, format = 'json')
-    raise 'format must be json or html' if format !~ /^(html|json)$/
+    raise SerpApiException.new('format must be json or html') if format !~ /^(html|json)$/
     as_json(get_results("/searches/#{search_id}.#{format}"))
   end
 
@@ -152,7 +152,7 @@ class SerpApiSearch
   def check_params(keys = [])
     return if @params.keys == [:engine]
 
-    raise 'keys must be a list of String or Symbol' unless keys.class == Array
+    raise SerpApiException.new('keys must be a list of String or Symbol') unless keys.class == Array
     missing = []
     keys.each do |key|
       case key.class.to_s
@@ -169,13 +169,19 @@ class SerpApiSearch
           end
         end
       else
-        raise 'keys must contains Symbol or String'
+        raise SerpApiException.new('keys must contains Symbol or String')
       end
     end
     if !missing.empty?
-      raise "missing required keys in params.\n #{missing.join(',')}"
+      raise SerpApiException.new("missing required keys in params.\n #{missing.join(',')}")
     end
   end
 
 end
 
+# Standard SerpApiException for anything related to the client
+class SerpApiException < StandardError
+  def initialize(message)
+    super(message)
+  end
+end

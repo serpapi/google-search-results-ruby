@@ -29,7 +29,7 @@ class EbaySearch < SerpApiSearch
   end
 
   def get_location
-    raise 'location is not supported by ' + EBAY_ENGINE
+    raise SerpApiException.new('location is not supported by ' + EBAY_ENGINE)
   end
 
 end

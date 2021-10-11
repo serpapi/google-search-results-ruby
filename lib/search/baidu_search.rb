@@ -27,7 +27,7 @@ class BaiduSearch < SerpApiSearch
   end
 
   def get_location
-    raise 'location is not supported by Baidu'
+    raise SerpApiException.new('location is not supported by Baidu')
   end
 
 end

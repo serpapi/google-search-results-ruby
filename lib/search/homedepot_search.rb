@@ -27,7 +27,7 @@ class HomedepotSearch < SerpApiSearch
   end
 
   def get_location
-    raise 'location is not supported by Homedepot'
+    raise SerpApiException.new('location is not supported by Homedepot')
   end
 
 end

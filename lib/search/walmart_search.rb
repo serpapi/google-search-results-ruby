@@ -27,7 +27,7 @@ class WalmartSearch < SerpApiSearch
   end
 
   def get_location
-    raise 'location is not supported by Walmart'
+    raise SerpApiException.new('location is not supported by Walmart')
   end
 
 end
