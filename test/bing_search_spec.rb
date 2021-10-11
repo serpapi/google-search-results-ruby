@@ -11,7 +11,7 @@ describe "Bing Search API" do
     hash = @search.get_hash
     expect(hash[:search_metadata][:status]).to eq('Success')
    # expect(hash[:search_metadata][:bing_url]).to match(/www.bing.com/)
-    expect(hash[:organic_results].size).to be >= 5
+    expect(hash[:organic_results].size).to be >= 3
     expect(hash[:organic_results].to_s).to match /coffee/i
     #expect(hash[:ads].size).to be >5
   end
