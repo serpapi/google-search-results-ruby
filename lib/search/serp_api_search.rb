@@ -11,12 +11,14 @@ YOUTUBE_ENGINE = 'youtube'
 DUCKDUCKGO_ENGINE = 'duckduckgo'
 WALMART_ENGINE = 'walmart'
 HOMEDEPOT_ENGINE = 'home_depot'
+APPLE_STORE_ENGINE = 'apple_app_store'
+NAVER_ENGINE = 'naver'
 
 # Generic HTTP client for serpapi.com
 #
 class SerpApiSearch
 
-  VERSION = "2.1.0"
+  VERSION = "2.2.0"
   BACKEND = "serpapi.com"
 
   attr_accessor :params
@@ -173,7 +175,7 @@ class SerpApiSearch
       end
     end
     if !missing.empty?
-      raise SerpApiException.new("missing required keys in params.\n #{missing.join(',')}")
+      raise SerpApiException.new("missing required keys in params: \n - #{missing.join("\n -")}")
     end
   end
 

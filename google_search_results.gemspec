@@ -3,7 +3,7 @@ require_relative 'lib/search/serp_api_search'
 Gem::Specification.new do |s|
   s.name        = "google_search_results"
   s.version     = SerpApiSearch::VERSION
-  s.summary     = "Get Google, Bing, Baidu, Ebay, Yahoo, Yandex Search Results via SerpApi.com"
+  s.summary     = "Get Google, Bing, Baidu, Ebay, Yahoo, Yandex, Home depot, Naver, Apple, Duckduckgo, Youtube search results via SerpApi.com"
   s.description = "Scape localized search results from search engine using SerpApi.com and returns Hash, JSON, raw HTML"
   s.authors     = ["hartator", "jvmvik"]
   s.email       = "hartator@gmail.com"

@@ -72,6 +72,10 @@ describe 'Search Google By Location' do
       })
       top_result = search.get_hash[:organic_results].first
 
+      if top_result.nil?
+        puts "oops empty organic results for #{city}"
+        next
+      end
       puts "top coffee result for #{location} is: #{top_result[:title]}"
     end
   end

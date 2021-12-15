@@ -448,6 +448,24 @@ pp search.get_hash
 
 https://serpapi.com/duckduckgo-search-api
 
+### Naver search API
+
+```ruby
+search = NaverSearch.new(query: "Coffee", api_key: "secretApiKey")
+pp search.get_hash
+```
+
+https://serpapi.com/duckduckgo-search-api
+
+### Apple store search API
+
+```ruby
+search = AppleStoreSearch.new(term: "Coffee", , api_key: "secretApiKey")
+pp search.get_hash
+```
+
+https://serpapi.com/duckduckgo-search-api
+
 ### Generic SerpApi search
 
 ```ruby
@@ -473,6 +491,9 @@ This library follows the regular raise an exception when something goes wrong pr
    A networking problem will be caused by either SerpApi.com or your internet.
 
 # Change log
+ * 2.2 
+   - add apple store search engine
+   - add naver search engine
  * 2.1 - Add more search engine: Youtube, Duckduckgo, Homedepot, Walmart
       - improve error management and documentation.
  * 2.0 - API simplified( GoogleSearchResults -> GoogleSearch), fix gem issue with 2.6+ Ruby, Out Of Box step to verify the package before delivery.
