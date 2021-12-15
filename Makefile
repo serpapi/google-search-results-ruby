@@ -29,4 +29,5 @@ tag:
 
 release: oobt
 	gem push `ls -t1 *.gem | head -1`
+	@echo "release public on: https://rubygems.org/gems/google_search_results/versions"
 
