@@ -426,7 +426,7 @@ search = HomedepotSearch.new(q: "Coffee")
 pp search.get_hash
 ```
 
-https://serpapi.com/homedepot-search-api
+https://serpapi.com/home-depot-search-api
 
 ### Walmart search API
 
