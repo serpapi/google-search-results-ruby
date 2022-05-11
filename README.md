@@ -1,7 +1,7 @@
 # Google Search Results in Ruby
 
 [![serpapi-search-ruby](https://github.com/serpapi/google-search-results-ruby/actions/workflows/ruby.yml/badge.svg)](https://github.com/serpapi/google-search-results-ruby/actions/workflows/ruby.yml)
-[![Gem Version](https://badge.fury.io/rb/google_search_results.svg)](https://badge.fury.io/rb/google_search_results)
+[![Gem Version](https://badge.fury.io/rb/google_search_results.svg)](https://rubygems.org/gems/google_search_results)
 
 This Ruby Gem is meant to scrape and parse results from Google, Bing, Baidu, Yandex, Yahoo, Ebay and more using [SerpApi](https://serpapi.com).
 
@@ -12,7 +12,7 @@ The following services are provided:
   * [Search Archive API](https://serpapi.com/search-archive-api)
   * [Account API](https://serpapi.com/account-api)
 
-SerpApi.com provides a [script builder](https://serpapi.com/demo) to get you started quickly.
+SerpApi.com provides a [script builder](https://serpapi.com/playground) to get you started quickly.
 
 ## Installation
 
@@ -22,14 +22,14 @@ Modern Ruby must be already installed:
 $ gem install google_search_results
 ```
 
-[Link to the gem page](https://rubygems.org/gems/google_search/)
+[Link to the gem page](https://rubygems.org/gems/google_search_results/)
 
 Tested Ruby versions:
  - 2.2
  - 2.5.2
  - 3.0.0
 
-see: Git hub actions.
+see: [GitHub Actions](https://github.com/serpapi/google-search-results-ruby/blob/9cbd9d64786aeff9765a2417ae007a1fb43ab110/.github/workflows/ruby.yml#L16).
 
 ## Quick start
 
