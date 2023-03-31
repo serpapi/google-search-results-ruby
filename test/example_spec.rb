@@ -70,13 +70,12 @@ describe 'Search Google By Location' do
         num: 1,  # number of result
         start: 0 # offset
       })
-      top_result = search.get_hash[:organic_results].first
-
-      if top_result.nil?
-        puts "oops empty organic results for #{city}"
+      results = search.get_hash
+      if results.dig(:local_results, :places).nil?
+        puts "oops empty local_results for #{city}"
         next
       end
-      puts "top coffee result for #{location} is: #{top_result[:title]}"
+      puts "top coffee result for #{location} is: #{results.dig(:local_results, :places).first[:title]}"
     end
   end
 
