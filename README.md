@@ -1,7 +1,16 @@
-# Google Search Results in Ruby
+<h1 align="center">Google Search Results in Ruby</h1>
 
-[![serpapi-search-ruby](https://github.com/serpapi/google-search-results-ruby/actions/workflows/ruby.yml/badge.svg)](https://github.com/serpapi/google-search-results-ruby/actions/workflows/ruby.yml)
-[![Gem Version](https://badge.fury.io/rb/google_search_results.svg)](https://rubygems.org/gems/google_search_results)
+<div align="center">
+   <img src="https://user-images.githubusercontent.com/78694043/233928869-58945703-f3c6-43b9-9627-4241e8f47a67.svg" width="600" alt="google-search-results-ruby-logo">
+</div>
+
+<div align="center">
+
+  <a href="https://github.com/serpapi/google-search-results-ruby/actions/workflows/ruby.yml">![serpapi-search-ruby](https://github.com/serpapi/google-search-results-ruby/actions/workflows/ruby.yml/badge.svg)</a>
+  <a href="">![Gem](https://img.shields.io/gem/dt/google_search_results)</a>
+  <a href="https://rubygems.org/gems/google_search_results">![Gem Version](https://badge.fury.io/rb/google_search_results.svg)</a>
+
+</div>
 
 This Ruby Gem is meant to scrape and parse results from Google, Bing, Baidu, Yandex, Yahoo, Ebay and more using [SerpApi](https://serpapi.com).
 
