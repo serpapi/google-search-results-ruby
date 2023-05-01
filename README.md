@@ -7,7 +7,7 @@
 <div align="center">
 
   <a href="https://github.com/serpapi/google-search-results-ruby/actions/workflows/ruby.yml">![serpapi-search-ruby](https://github.com/serpapi/google-search-results-ruby/actions/workflows/ruby.yml/badge.svg)</a>
-  <a href="">![Gem](https://img.shields.io/gem/dt/google_search_results)</a>
+  ![Gem](https://img.shields.io/gem/dt/google_search_results)
   <a href="https://rubygems.org/gems/google_search_results">![Gem Version](https://badge.fury.io/rb/google_search_results.svg)</a>
 
 </div>
