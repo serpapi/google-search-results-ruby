@@ -2,21 +2,17 @@ require_relative 'serp_api_search'
 
 # Apple Store Search Result for Ruby powered by SerpApi
 #
-# Search API Usage
+# @example Search API Usage
+#   parameter = {
+#     term: "laptop",
+#     api_key: "Your SERP API Key"
+#   }
 #
-# ```ruby
-# parameter = {
-#   term: "laptop",
-#   api_key: "Your SERP API Key"
-# }
+#   search = AppleStoreSearch.new(parameter)
 #
-# search = AppleStoreSearch.new(parameter)
-#
-# html_results = search.get_html
-# hash_results = search.get_hash
-# json_results = search.get_json
-#
-# ```
+#   html_results = search.get_html
+#   hash_results = search.get_hash
+#   json_results = search.get_json
 # 
 # doc: https://serpapi.com/bing-search-api
 
