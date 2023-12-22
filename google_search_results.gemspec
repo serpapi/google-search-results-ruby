@@ -3,8 +3,8 @@ require_relative 'lib/search/serp_api_search'
 Gem::Specification.new do |s|
   s.name        = "google_search_results"
   s.version     = SerpApiSearch::VERSION
-  s.summary     = "Get Google, Bing, Baidu, Ebay, Yahoo, Yandex, Home depot, Naver, Apple, Duckduckgo, Youtube search results via SerpApi.com"
-  s.description = "Scape localized search results from search engine using SerpApi.com and returns Hash, JSON, raw HTML"
+  s.summary     = "Official client for SerpApi.com - scrape search results from multiple search engines."
+  s.description = "Integrate search data into your Ruby application. This library is the official wrapper for SerpApi.com. SerpApi supports Google, Google Maps, Google Shopping, Baidu, Yandex, Yahoo, eBay, App Stores, and more."
   s.authors     = ["hartator", "jvmvik"]
   s.email       = "hartator@gmail.com"
   s.files       = [ "README.md", "lib/google_search_results.rb"] + Dir.glob("lib/search/*.rb")
