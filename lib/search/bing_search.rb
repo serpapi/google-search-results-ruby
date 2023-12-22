@@ -2,23 +2,19 @@ require_relative 'serp_api_search'
 
 # Bing Search Result for Ruby powered by SerpApi
 #
-# Search API Usage
+# @example Search API Usage
+#   parameter = {
+#     q: "query",
+#     location: "city,state,country",
+#     api_key: "Your SERP API Key"
+#   }
 #
-# ```ruby
-# parameter = {
-#   q: "query",
-#   location: "city,state,country",
-#   api_key: "Your SERP API Key"
-# }
+#   search = BingSearch.new(parameter)
+#   search.params[:location] = "Portland"
 #
-# search = BingSearch.new(parameter)
-# search.params[:location] = "Portland"
-#
-# html_results = search.get_html
-# hash_results = search.get_hash
-# json_results = search.get_json
-#
-# ```
+#   html_results = search.get_html
+#   hash_results = search.get_hash
+#   json_results = search.get_json
 # 
 # doc: https://serpapi.com/bing-search-api
 

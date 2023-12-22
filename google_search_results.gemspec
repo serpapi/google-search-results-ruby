@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description = "Scape localized search results from search engine using SerpApi.com and returns Hash, JSON, raw HTML"
   s.authors     = ["hartator", "jvmvik"]
   s.email       = "hartator@gmail.com"
-  s.files       = [ "lib/google_search_results.rb"] + Dir.glob("lib/search/*.rb")
+  s.files       = [ "README.md", "lib/google_search_results.rb"] + Dir.glob("lib/search/*.rb")
   s.homepage    = "https://github.com/serpapi/google-search-results-ruby"
   s.license     = "MIT"
   s.required_ruby_version = '>= 1.9.2'

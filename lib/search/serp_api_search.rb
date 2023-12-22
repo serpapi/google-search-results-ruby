@@ -25,14 +25,10 @@ class SerpApiSearch
 
   # constructor
   #
-  # Usage
-  # ---
-  #
-  # ```ruby
-  # require 'google_search'
-  # search = SerpApiSearch.new({q: "coffee", api_key: "secure API key", engine: "google"})
-  # result = search.get_json
-  # ```
+  # @example Usage
+  #   require 'google_search'
+  #   search = SerpApiSearch.new({q: "coffee", api_key: "secure API key", engine: "google"})
+  #   result = search.get_json
   #
   # @param [Hash] params contains requested parameter
   # @param [String] engine google|baidu|google|bing|ebay|yandex (optional or can be set in params)
