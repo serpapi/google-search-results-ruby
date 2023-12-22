@@ -26,9 +26,10 @@ $ gem install google_search_results
 
 Tested Ruby versions:
 
- - 2.2
- - 2.5.2
- - 3.0.0
+ - 2.5
+ - 3.0
+ - 3.1
+ - 3.2
 
 See: [GitHub Actions](https://github.com/serpapi/google-search-results-ruby/blob/9cbd9d64786aeff9765a2417ae007a1fb43ab110/.github/workflows/ruby.yml#L16).
 
