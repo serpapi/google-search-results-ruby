@@ -25,11 +25,12 @@ $ gem install google_search_results
 [Link to the gem page](https://rubygems.org/gems/google_search_results/)
 
 Tested Ruby versions:
+
  - 2.2
  - 2.5.2
  - 3.0.0
 
-see: [GitHub Actions](https://github.com/serpapi/google-search-results-ruby/blob/9cbd9d64786aeff9765a2417ae007a1fb43ab110/.github/workflows/ruby.yml#L16).
+See: [GitHub Actions](https://github.com/serpapi/google-search-results-ruby/blob/9cbd9d64786aeff9765a2417ae007a1fb43ab110/.github/workflows/ruby.yml#L16).
 
 ## Quick start
 
@@ -96,12 +97,14 @@ See the [playground to generate your code.](https://serpapi.com/playground)
 ## Guide
 ### How to set the private API key
 The api_key can be set globally using a singleton pattern.
+
 ```ruby
 GoogleSearch.api_key = "secret_api_key"
 search = GoogleSearch.new(q: "coffee")
 ```
 
 or api_key can be provided for each search.
+
 ```ruby
 search = GoogleSearch.new(q: "coffee", api_key: "secret_api_key")
 ```
@@ -109,6 +112,7 @@ search = GoogleSearch.new(q: "coffee", api_key: "secret_api_key")
 To get the key simply copy/paste from [serpapi.com/dashboard](https://serpapi.com/dashboard).
 
 ### Search API capability for Google
+
 ```ruby
 search_params = {
   q: "search",
@@ -122,7 +126,7 @@ search_params = {
   start: "Pagination Offset",
   api_key: "private key", # copy paste from https://serpapi.com/dashboard
   tbm: "nws|isch|shop",
-  tbs: "custom to be search criteria"
+  tbs: "custom to be search criteria",
   async: true|false # allow async
 }
 
@@ -155,21 +159,25 @@ We love true open source, continuous integration and Test Drive Development (TDD
 The directory test/ includes specification/examples.
 
 Set your api key.
+
 ```bash
 export API_KEY="your secret key"
 ```
 
 Install RSpec
+
 ```bash
 gem install rspec
 ```
 
 To run the test:
+
 ```bash
 rspec test
 ```
 
 or if you prefers Rake
+
 ```bash
 rake test
 ```
@@ -182,23 +190,29 @@ pp location_list
 ```
 
 it prints the first 3 location matching Austin (Texas, Texas, Rochester)
+
 ```ruby
-[{:id=>"585069bdee19ad271e9bc072",
-  :google_id=>200635,
-  :google_parent_id=>21176,
-  :name=>"Austin, TX",
-  :canonical_name=>"Austin,TX,Texas,United States",
-  :country_code=>"US",
-  :target_type=>"DMA Region",
-  :reach=>5560000,
-  :gps=>[-97.7430608, 30.267153],
-  :keys=>["austin", "tx", "texas", "united", "states"]},
-  ...]
+[
+  {
+    id: "585069bdee19ad271e9bc072",
+    google_id: 200635,
+    google_parent_id: 21176,
+    name: "Austin, TX",
+    canonical_name: "Austin,TX,Texas,United States",
+    country_code: "US",
+    target_type: "DMA Region",
+    reach: 5560000,
+    gps: [-97.7430608, 30.267153],
+    keys: ["austin", "tx", "texas", "united", "states"]
+  },
+  #...
+]
 ```
 
 ### Search Archive API
 This API allows to retrieve previous search.
-To do so run a search to save a search_id.
+To do so run a search to save a `search_id`.
+
 ```ruby
 search = GoogleSearch.new(q: "Coffee", location: "Portland")
 original_search = search.get_hash
@@ -212,9 +226,11 @@ search = GoogleSearch.new
 archive_search = search.get_search_archive(search_id)
 pp archive_search
 ```
+
 it prints the search from the archive.
 
 ### Account API
+
 ```ruby
 search = GoogleSearch.new
 pp search.get_account
@@ -230,6 +246,7 @@ image_results_list.each do |image_result|
   puts image_result[:original]
 end
 ```
+
 To download the image: `wget #{image_result[:original]}`
 
 this code prints all the images links,
@@ -270,7 +287,7 @@ shopping_results_list.each do |shopping_result|
 end
 ```
 
-this script prints all the shopping results order by review order with position.
+This script prints all the shopping results order by review order with position.
 
 ### Google Search By Location
 
