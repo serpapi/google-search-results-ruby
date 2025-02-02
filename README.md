@@ -3,20 +3,20 @@
 [![serpapi-search-ruby](https://github.com/serpapi/google-search-results-ruby/actions/workflows/ruby.yml/badge.svg)](https://github.com/serpapi/google-search-results-ruby/actions/workflows/ruby.yml)
 [![Gem Version](https://badge.fury.io/rb/google_search_results.svg)](https://rubygems.org/gems/google_search_results)
 
-This Ruby Gem is meant to scrape and parse results from Google, Bing, Baidu, Yandex, Yahoo, Ebay and more using [SerpApi](https://serpapi.com).
+Our **google_search_results** Ruby gem helps you scrape and parse results from Google, Bing, Baidu, Yandex, Yahoo, Ebay and more using [SerpApi](https://serpapi.com).
 
-The following services are provided:
+We provide the following services:
 
   * [Search API](https://serpapi.com/search-api)
   * [Location API](https://serpapi.com/locations-api)
   * [Search Archive API](https://serpapi.com/search-archive-api)
   * [Account API](https://serpapi.com/account-api)
 
-SerpApi.com provides a [script builder](https://serpapi.com/playground) to get you started quickly.
+Get started quickly with our [search query playground](https://serpapi.com/playground).
 
 ## Installation
 
-Modern Ruby must be already installed:
+Install the **google_search_results** gem with the following command:
 
 ```bash
 $ gem install google_search_results
@@ -24,7 +24,7 @@ $ gem install google_search_results
 
 [Link to the gem page](https://rubygems.org/gems/google_search_results/)
 
-Tested Ruby versions:
+The **google_search_results** gem supports the following Ruby versions:
 
  - 2.5
  - 3.0
@@ -33,7 +33,11 @@ Tested Ruby versions:
 
 See: [GitHub Actions](https://github.com/serpapi/google-search-results-ruby/blob/9cbd9d64786aeff9765a2417ae007a1fb43ab110/.github/workflows/ruby.yml#L16).
 
+ Older versions of Ruby may still work, but are unsupported and not recommended.
+
 ## Quick start
+
+The following example runs a Google search for "coffee" using your secret API key.
 
 ```ruby
 require 'google_search_results'
@@ -41,28 +45,26 @@ search = GoogleSearch.new(q: "coffee", serp_api_key: "secret_api_key")
 hash_results = search.get_hash
  ```
 
-This example runs a search about "coffee" using your secret api key.
+When the example code is run, the SerpApi.com service (backend) does the following:
+ - Searches Google using the query: `q = "coffee"`.
+ - Parses the HTML responses.
+ - Returns a standardized JSON response.
 
-The SerpApi.com service (backend)
- - searches on Google using the search: q = "coffee"
- - parses the messy HTML responses
- - return a standardizes JSON response
-The class GoogleSearch
- - Format the request to SerpApi.com server
- - Execute GET http request
- - Parse JSON into Ruby Hash using JSON standard library provided by Ruby
-Et voila..
+On the client side, the provided Ruby class `GoogleSearch` completes the following:
+ - Formats the request to the SerpApi.com server.
+ - Executes a `GET` HTTP request.
+ - Parses the JSON response from the SerpApi.com server into Ruby Hash using the Ruby standard library.
 
 Alternatively, you can search:
- - Bing using BingSearch class
- - Baidu using BaiduSearch class
- - Yahoo using YahooSearch class
- - Yandex using YandexSearch class
- - Ebay using EbaySearch class
- - Home depot using HomeDepotSearch class
- - Youtube using YoutubeSearch class
+ - Bing using the `BingSearch` class.
+ - Baidu using the `BaiduSearch` class.
+ - Yahoo using the `YahooSearch` class.
+ - Yandex using the `YandexSearch` class.
+ - Ebay using the `EbaySearch` class.
+ - Home Depot using the `HomeDepotSearch` class.
+ - Youtube using the `YoutubeSearch` class.
 
-See the [playground to generate your code.](https://serpapi.com/playground)
+See the [ search query playground to generate your code](https://serpapi.com/playground).
 
 ### Summary
 - [Google Search Results in Ruby](#google-search-results-in-ruby)
@@ -96,21 +98,23 @@ See the [playground to generate your code.](https://serpapi.com/playground)
 - [Contributing](#contributing)
 
 ## Guide
-### How to set the private API key
-The api_key can be set globally using a singleton pattern.
+### How to set a private API key
+You can set an `api_key` globally using a singleton pattern, or you can provide an `api_key` for each search.
+
+The following is an example of setting a global `api_key`:
 
 ```ruby
 GoogleSearch.api_key = "secret_api_key"
 search = GoogleSearch.new(q: "coffee")
 ```
 
-or api_key can be provided for each search.
+The following is an example of providing an `api_key` for an individual search:
 
 ```ruby
 search = GoogleSearch.new(q: "coffee", api_key: "secret_api_key")
 ```
 
-To get the key simply copy/paste from [serpapi.com/dashboard](https://serpapi.com/dashboard).
+You can find your API key at [serpapi.com/dashboard](https://serpapi.com/dashboard).
 
 ### Search API capability for Google
 
@@ -147,41 +151,15 @@ hash_results = search.get_hash
 json_results = search.get_json
 ```
 
-(the full documentation)[https://serpapi.com/search-api].
+For details, see [Google Search Engine Results API documentation](https://serpapi.com/search-api).
 
-More search API are documented on [SerpApi.com](http://serpapi.com).
+Find documentation for other search APIs at [SerpApi.com](http://serpapi.com).
 
-You will find more hands on examples below.
 
 ### Example by specification
-We love true open source, continuous integration and Test Drive Development (TDD).
- We are using RSpec to test [our infrastructure around the clock](https://travis-ci.org/serpapi/google-search-results-ruby) to achieve the best QoS (Quality Of Service).
 
-The directory test/ includes specification/examples.
+Refer to the following examples to learn more about our Google search API's capabilities.
 
-Set your api key.
-
-```bash
-export API_KEY="your secret key"
-```
-
-Install RSpec
-
-```bash
-gem install rspec
-```
-
-To run the test:
-
-```bash
-rspec test
-```
-
-or if you prefers Rake
-
-```bash
-rake test
-```
 
 ### Location API
 
@@ -190,7 +168,7 @@ location_list = GoogleSearch.new(q: "Austin", limit: 3).get_location
 pp location_list
 ```
 
-it prints the first 3 location matching Austin (Texas, Texas, Rochester)
+Prints the first 3 locations matching `Austin` (Texas, Texas, Rochester).
 
 ```ruby
 [
@@ -211,8 +189,9 @@ it prints the first 3 location matching Austin (Texas, Texas, Rochester)
 ```
 
 ### Search Archive API
-This API allows to retrieve previous search.
-To do so run a search to save a `search_id`.
+Retrieves a  previous search.
+
+For example, to retrieve a search, first run a search and save the search ID in a variable, `search_id`:
 
 ```ruby
 search = GoogleSearch.new(q: "Coffee", location: "Portland")
@@ -220,7 +199,7 @@ original_search = search.get_hash
 search_id = original_search[:search_metadata][:id]
 ```
 
-Now let retrieve the previous search from the archive.
+Next, retrieve the previous search from the archive using the saved `search_id`.
 
 ```ruby
 search = GoogleSearch.new
@@ -228,7 +207,7 @@ archive_search = search.get_search_archive(search_id)
 pp archive_search
 ```
 
-it prints the search from the archive.
+Finally, the search from the archive is printed in the terminal.
 
 ### Account API
 
@@ -236,25 +215,32 @@ it prints the search from the archive.
 search = GoogleSearch.new
 pp search.get_account
 ```
-it prints your account information.
+Prints your account information.
 
 ### Search Google Images
 
 ```ruby
-search = GoogleSearch.new(q: 'cofffe', tbm: "isch")
+search = GoogleSearch.new(q: 'coffee', tbm: "isch")
 image_results_list = search.get_hash[:images_results]
 image_results_list.each do |image_result|
   puts image_result[:original]
 end
 ```
 
-To download the image: `wget #{image_result[:original]}`
+The previous code prints all image links. To print all image links **and** download all images using `wget`, use the following example code:
 
-this code prints all the images links,
- and download image if you un-comment the line with wget (linux/osx tool to download image).
+```ruby
+search = GoogleSearch.new(q: 'coffee', tbm: "isch")
+image_results_list = search.get_hash[:images_results]
+image_results_list.each do |image_result|
+  puts image_result[:original]
+  wget #{image_result[:original]}
+end
+```
 
 ### Search Google News
 
+The following example prints the first 3 pages of news titles from the past 24 hours.
 ```ruby
 search = GoogleSearch.new({
   q: 'cofffe', # search search
@@ -272,9 +258,9 @@ search = GoogleSearch.new({
 end
 ```
 
-this script prints the first 3 pages of the news title for the last 24h.
-
 ### Search Google Shopping
+
+The following example prints all shopping results. Shopping results with the best reviews are printed first.
 
 ```ruby
 search = GoogleSearch.new({
@@ -288,12 +274,9 @@ shopping_results_list.each do |shopping_result|
 end
 ```
 
-This script prints all the shopping results order by review order with position.
-
 ### Google Search By Location
 
-With SerpApi.com, we can build Google search from anywhere in the world.
-This code is looking for the best coffee shop per city.
+You can make Google searches for any location. The following example code searches Google for the best coffee shop in New York, Paris, and Berlin.
 
 ```ruby
 ["new york", "paris", "berlin"].each do |city|
@@ -304,7 +287,7 @@ This code is looking for the best coffee shop per city.
     search = GoogleSearch.new({
       q: 'best coffee shop',
       location: location,
-      num: 1,  # number of result
+      num: 1,  # number of results
       start: 0 # offset
     })
     top_result = search.get_hash[:organic_results].first
@@ -315,9 +298,11 @@ This code is looking for the best coffee shop per city.
 
 ### Batch Asynchronous search
 
-We do offer two ways to boost your searches thanks to `async` parameter.
- - Non-blocking - async=true  (recommended)
- - Blocking - async=false - it's more compute intensive because the search would need to hold many connections.
+Increase your search performance through batched searches using the `async` parameter.
+ - Non-blocking - `async=true`  (recommended).
+ - Blocking - `async=false` (not recommended). Blocking, or synchronous batched searches, are more compute intensive because they require many connections.
+
+The following example shows how to run a batch of searches asynchronously.
 
 ```ruby
 company_list = %w(microsoft apple nvidia)
@@ -362,10 +347,9 @@ end
 search_queue.close
 puts 'all searches completed'
   ```
-This code shows a simple implementation to run a batch of asynchronously searches.
 
 
-## Supported search engine
+## Supported search engines
 ### Google search API
 
 ```ruby
@@ -497,36 +481,37 @@ hash = search.get_hash
 pp hash[:organic_results]
 ```
 
-see: google-search-results-ruby/test/search_api_spec.rb
+For a complete list of supported search engines, see: [search_api_spec.rb](https://github.com/serpapi/google-search-results-ruby/blob/master/test/search_api_spec.rb)
 
 
 ### Error management
 
-This library follows the regular raise an exception when something goes wrong provided by Ruby.
- Any networking related exception will be returned as is. 
-  Anything related to the client layer will be returned as a SerpApiException.
-   A SerpApiException might be caused by a bug in the library.
-   A networking problem will be caused by either SerpApi.com or your internet.
+The **google_search_results** gem follows the regular flow of raising exceptions when something goes wrong in Ruby code, however, any network related exceptions will be returned as-is.
+
+Errors related to the client layer will be returned as a `SerpApiException` object. When troubleshooting, note the following:
+
+- A `SerpApiException` may be caused by a bug in the **google_search_results** gem.
+- A network error can be caused by either SerpApi.com or your internet connection.
 
 # Change log
- * 2.2 
-   - add apple store search engine
-   - add naver search engine
- * 2.1 - Add more search engine: Youtube, Duckduckgo, Homedepot, Walmart
-      - improve error management and documentation.
+ * 2.2
+   - Add Apple store search engine.
+   - Add Naver search engine.
+ * 2.1 - Add more search engines: Youtube, Duckduckgo, Homedepot, Walmart.
+      - Improve error management and documentation.
  * 2.0 - API simplified( GoogleSearchResults -> GoogleSearch), fix gem issue with 2.6+ Ruby, Out Of Box step to verify the package before delivery.
- * 1.3.2 - rename variable client to search for naming consistency
- * 1.3 - support for all major search engine
- * 1.2 - stable versino to support goole and few more search engine
- * 1.1 - client connection improvement to allow multi threading and fiber support
- * 1.0 - first stable version with Google engine search with Google image
+ * 1.3.2 - Rename variable client to search for naming consistency.
+ * 1.3 - Support for all major search engine.
+ * 1.2 - Stable version to support Google and additional search engines.
+ * 1.1 - Client connection improvement to allow multi threading and fiber support.
+ * 1.0 - First stable version with Google engine search with Google image.
 
 # Roadmap
- * 2.1 Improve exception / HTTP status handling
+ * 2.1 Improve exception and HTTP status handling
 
 # Conclusion
-SerpApi supports all the major search engines. Google has the more advance support with all the major services available: Images, News, Shopping and more..
-To enable a type of search, the field tbm (to be matched) must be set to:
+SerpApi supports all major search engines. We offer advanced support for Google search with integrations for many Google search services, including: Images, News, Shopping and more.
+To enable a type of search, the field `tbm` (to be matched) must be set to:
 
  * isch: Google Images API.
  * nws: Google News API.
@@ -536,9 +521,15 @@ To enable a type of search, the field tbm (to be matched) must be set to:
 
 The field `tbs` allows to customize the search even more.
 
-[The full documentation is available here.](https://serpapi.com/search-api)
+For details, see the [search-api documentation](https://serpapi.com/search-api).
 
 # Contributing
+
+We love true open source, continuous integration and Test Drive Development (TDD).
+
+We use RSpec to test [our infrastructure around the clock](https://travis-ci.org/serpapi/google-search-results-ruby) to achieve the best QoS (Quality Of Service).
+
+The directory `test/` includes specifications and examples.
 
 Contributions are welcome, feel to submit a pull request!
 
@@ -546,5 +537,6 @@ To run the tests:
 
 ```bash
 export API_KEY="your api key"
-rake test
+gem install rspec
+rpsec test # Or alternatively, `rake test`.
 ```
