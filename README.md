@@ -33,7 +33,7 @@ The **google_search_results** gem supports the following Ruby versions:
 
 See: [GitHub Actions](https://github.com/serpapi/google-search-results-ruby/blob/9cbd9d64786aeff9765a2417ae007a1fb43ab110/.github/workflows/ruby.yml#L16).
 
- Older versions of Ruby may still work, but are unsupported and not recommended.
+ Older versions of Ruby _may_ still work, but are unsupported and not recommended.
 
 ## Quick start
 
@@ -243,7 +243,7 @@ end
 The following example prints the first 3 pages of news titles from the past 24 hours.
 ```ruby
 search = GoogleSearch.new({
-  q: 'cofffe', # search search
+  q: 'coffee', # search search
   tbm: "nws", # news
   tbs: "qdr:d", # last 24h
   num: 10
@@ -264,7 +264,7 @@ The following example prints all shopping results. Shopping results with the bes
 
 ```ruby
 search = GoogleSearch.new({
-  q: 'cofffe', # search search
+  q: 'coffee', # search search
   tbm: "shop", # shopping
   tbs: "tbs=p_ord:rv" # by best review
 })
@@ -413,14 +413,14 @@ https://serpapi.com/ebay-search-api
 ### Youtube search API
 
 ```ruby
-YoutubeySearch.api_key = ""
+YoutubeSearch.api_key = ""
 search = YoutubeSearch.new(search_query: "Coffee")
 pp search.get_hash
 ```
 
 https://serpapi.com/youtube-search-api
 
-### Homedepot search API
+### Home Depot search API
 
 ```ruby
 HomedepotSearch.api_key = ""
@@ -538,5 +538,5 @@ To run the tests:
 ```bash
 export API_KEY="your api key"
 gem install rspec
-rpsec test # Or alternatively, `rake test`.
+rspec test # Or alternatively, `rake test`.
 ```
