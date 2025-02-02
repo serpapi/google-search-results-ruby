@@ -519,7 +519,7 @@ To enable a type of search, the field `tbm` (to be matched) must be set to:
  * any other Google service should work out of the box.
  * (no tbm parameter): regular Google search.
 
-The field `tbs` allows to customize the search even more.
+The `tbs` field allows you to customize a search even further.
 
 For details, see the [search-api documentation](https://serpapi.com/search-api).
 
