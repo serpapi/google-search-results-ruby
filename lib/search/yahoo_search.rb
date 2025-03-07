@@ -21,7 +21,6 @@ class YahooSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, YAHOO_ENGINE)
-    check_params([:p, :engine])
   end
 
   def get_location

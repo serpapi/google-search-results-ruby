@@ -20,7 +20,6 @@ class YoutubeSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, YOUTUBE_ENGINE)
-    check_params([:search_query, :engine])
   end
 
 end

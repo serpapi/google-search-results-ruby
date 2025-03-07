@@ -146,35 +146,6 @@ class SerpApiSearch
       raise e
     end
   end
-
-  def check_params(keys = [])
-    return if @params.keys == [:engine]
-
-    raise SerpApiException.new('keys must be a list of String or Symbol') unless keys.class == Array
-    missing = []
-    keys.each do |key|
-      case key.class.to_s
-      when 'String'
-        if @params[key].nil?
-          if @params[key.to_sym].nil?
-            missing << key.to_s
-          end
-        end
-      when 'Symbol'
-        if @params[key].nil?
-          if @params[key.to_s].nil?
-            missing << key.to_s
-          end
-        end
-      else
-        raise SerpApiException.new('keys must contains Symbol or String')
-      end
-    end
-    if !missing.empty?
-      raise SerpApiException.new("missing required keys in params: \n - #{missing.join("\n -")}")
-    end
-  end
-
 end
 
 # Standard SerpApiException for anything related to the client

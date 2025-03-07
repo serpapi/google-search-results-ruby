@@ -20,7 +20,6 @@ class BaiduSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, BAIDU_ENGINE)
-    check_params([:q, :engine])
   end
 
   def get_location

@@ -21,7 +21,6 @@ class EbaySearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, EBAY_ENGINE)
-    check_params([:_nkw, :engine])
   end
 
   def get_location

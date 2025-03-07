@@ -21,7 +21,6 @@ class YandexSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, YANDEX_ENGINE)
-    check_params([:text, :engine])
   end
 
   def get_location
