@@ -20,7 +20,6 @@ class DuckduckgoSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, DUCKDUCKGO_ENGINE)
-    check_params([:q, :engine])
   end
 
 end

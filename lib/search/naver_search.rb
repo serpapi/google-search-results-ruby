@@ -22,7 +22,6 @@ class NaverSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, NAVER_ENGINE)
-    check_params([:query, :engine])
   end
 
   def get_location

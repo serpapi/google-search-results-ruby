@@ -20,7 +20,6 @@ class AppleStoreSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, APPLE_STORE_ENGINE)
-    check_params([:term, :engine])
   end
 
   def get_location
