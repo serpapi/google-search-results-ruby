@@ -5,6 +5,18 @@
 
 This Ruby Gem is meant to scrape and parse results from Google, Bing, Baidu, Yandex, Yahoo, Ebay and more using [SerpApi](https://serpapi.com).
 
+---
+
+## Deprecation Notice
+
+This library is deprecated in favor of the [serpapi-ruby](https://github.com/serpapi/serpapi-ruby) which offers: 
+- 3x faster performance
+- Better error handling
+- Feature persistent connections
+- Asynchronous search capabilities
+
+---
+
 The following services are provided:
 
   * [Search API](https://serpapi.com/search-api)
