@@ -20,7 +20,6 @@ class WalmartSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, WALMART_ENGINE)
-    check_params([:query, :engine])
   end
 
   def get_location
