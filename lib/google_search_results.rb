@@ -1,3 +1,5 @@
+warn "[DEPRECATION] The `google_search_results` gem is deprecated. Please use the `serpapi` gem instead. See https://github.com/serpapi/serpapi-ruby"
+
 require_relative 'search/serp_api_search.rb'
 require_relative 'search/baidu_search.rb'
 require_relative 'search/bing_search.rb'

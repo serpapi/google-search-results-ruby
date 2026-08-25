@@ -11,10 +11,23 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/serpapi/google-search-results-ruby"
   s.license     = "MIT"
   s.required_ruby_version = '>= 1.9.2'
+  s.post_install_message = <<~MSG
+
+    +----------------------------------------------------------+
+    |                   DEPRECATION NOTICE                     |
+    +----------------------------------------------------------+
+    | The `google_search_results` gem is deprecated.           |
+    | Please switch to the `serpapi` gem instead:              |
+    |                                                          |
+    |   gem install serpapi                                    |
+    |                                                          |
+    | See https://github.com/serpapi/serpapi-ruby              |
+    +----------------------------------------------------------+
+
+  MSG
   s.add_development_dependency 'rake', '~> 13.0.1'
   s.add_development_dependency 'rspec', '~> 3.9'
   s.add_development_dependency 'yard', '~> 0.9.24'
   s.add_development_dependency 'rubocop', '~> 0.49.1'
   s.metadata["yard.run"] = "yri"
 end
-
