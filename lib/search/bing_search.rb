@@ -22,7 +22,6 @@ class BingSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, BING_ENGINE)
-    check_params([:q, :engine])
   end
 
 end

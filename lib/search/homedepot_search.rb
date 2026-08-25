@@ -20,7 +20,6 @@ class HomedepotSearch < SerpApiSearch
 
   def initialize(params = {})
     super(params, HOMEDEPOT_ENGINE)
-    check_params([:q, :engine])
   end
 
   def get_location
